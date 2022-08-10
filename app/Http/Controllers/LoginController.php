@@ -38,10 +38,7 @@ class LoginController extends Controller
      */
     public function store(Request $request)
     {
-        $validate = $request->validate([
-            'email' => 'required|string|email|max:255',
-            'password' => 'required|string|min:6',
-        ]);
+        $validate = $this->validateLogin($request);
 
         if (Auth::attempt($validate)) {
             $request->session()->regenerate();
@@ -102,5 +99,14 @@ class LoginController extends Controller
         request()->session()->invalidate();
         request()->session()->regenerateToken();
         return redirect()->route('index');
+    }
+
+    private function validateLogin(Request $request)
+    {
+        $validate = $request->validate([
+            'email' => 'required|string|email|max:255',
+            'password' => 'required|string|min:6',
+        ]);
+        return $validate;
     }
 }
