@@ -39,11 +39,7 @@ class RegisterController extends Controller
      */
     public function store(Request $request)
     {
-        $validate = $request->validate([
-            'name' => 'required|string|max:255|min:3',
-            'email' => 'required|string|email:dns|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
-        ]);
+        $validate = $this->validateRegister($request);
 
         $user = [
             'name' => $validate['name'],
@@ -106,5 +102,15 @@ class RegisterController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    private function validateRegister(Request $request)
+    {
+        $validate =  $request->validate([
+            'name' => 'required|string|max:255|min:3',
+            'email' => 'required|string|email:dns|max:255|unique:users',
+            'password' => 'required|string|min:6|confirmed',
+        ]);
+        return $validate;
     }
 }
