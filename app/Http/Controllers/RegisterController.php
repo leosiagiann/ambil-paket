@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Profile;
 use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
@@ -51,7 +52,13 @@ class RegisterController extends Controller
             'password' => Hash::make($validate['password']),
         ];
 
-        User::create($user);
+        $newUser = User::create($user);
+
+        $profile = new Profile();
+        $profile->user_id = $newUser->id;
+        $profile->profile_picture = 'default.png';
+        $profile->save();
+
 
         return redirect()->route('auth.login')->with('success', 'Register successfull! Please login');
     }

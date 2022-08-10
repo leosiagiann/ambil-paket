@@ -24,8 +24,8 @@
             <i class="fas fa-fw fa-gift"></i>
             <span>Paket</span>
         </a>
-        <div id="collapseTwo" class="collapse {{ $title != 'Dashboard' ? 'show' : ''}}" aria-labelledby="headingTwo"
-            data-parent="#accordionSidebar">
+        <div id="collapseTwo" class="collapse {{ ($title != 'Dashboard' && $title != 'Profile') ? 'show' : ''}}"
+            aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Pilihan Paket:</h6>
                 <a class="collapse-item {{ $title == 'Kirim Paket' ? 'active' : ''}}"
@@ -33,8 +33,8 @@
                 <a class="collapse-item {{ $title == 'Lacak Paket' ? 'active' : ''}}"
                     href="{{ route('customer.lacak-paket') }}">Lacak
                     Paket</a>
-                <a class="collapse-item {{ $title == 'Sejarah Pengiriman' ? 'active' : ''}}"
-                    href="{{ route('customer.sejarah-pengiriman') }}">Sejarah
+                <a class="collapse-item {{ $title == 'Riwayat Pengiriman' ? 'active' : ''}}"
+                    href="{{ route('customer.riwayat-pengiriman') }}">Riwayat
                     Pengiriman</a>
             </div>
         </div>

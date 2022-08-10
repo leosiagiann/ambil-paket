@@ -19,20 +19,20 @@ class CreateItemsTable extends Migration
                 ->constrained()
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
-            $table->string('resi')->unique();
+            $table->string('resi')->unique()->nullable();
             $table->string('sender');
             $table->string('sender_phone');
             $table->string('sender_address');
-            $table->string('detail_sender_address');
+            $table->string('detail_sender_address')->nullable();
             $table->string('receiver');
             $table->string('receiver_phone');
             $table->string('receiver_address');
-            $table->string('detail_receiver_address');
+            $table->string('detail_receiver_address')->nullable();
             $table->string('weight');
-            $table->double('price');
-            $table->string('time_delivery');
+            $table->double('price')->nullable();
+            $table->string('time_delivery')->nullable();
             $table->string('status');
-            $table->string('note');
+            $table->string('note')->nullable();
             $table->timestamps();
         });
     }

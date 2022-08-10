@@ -23,15 +23,13 @@
             </a>
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                 @auth
-                <a class="dropdown-item" href="#">
+                @if (auth()->user()->role->name == 'customer')
+                <a class="dropdown-item" href="{{ route(auth()->user()->role->name.'.profile') }}">
                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                     Profile
                 </a>
-                <a class="dropdown-item" href="#">
-                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                    Settings
-                </a>
                 <div class="dropdown-divider"></div>
+                @endif
                 <a class="dropdown-item" href="{{ route('auth.logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>

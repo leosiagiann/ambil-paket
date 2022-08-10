@@ -7,6 +7,7 @@ use App\Http\Controllers\FinanceController;
 use App\Http\Controllers\GuestController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SuperAdminController;
 use App\Models\Role;
@@ -23,8 +24,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::prefix('')->group(function () {
-    Route::get('', [GuestController::class, 'index'])->name('index')->middleware('isGuest');
+Route::name('index')->prefix('')->group(function () {
+    Route::group(['middleware' => 'isGuest'], function () {
+        Route::get('', [GuestController::class, 'index']);
+    });
 });
 
 Route::name('customer.')->prefix('customer')->group(function () {
@@ -33,7 +36,9 @@ Route::name('customer.')->prefix('customer')->group(function () {
             Route::get('', [CustomerController::class, 'index'])->name('index');
             Route::get('kirim-paket', [ItemController::class, 'index'])->name('item');
             Route::get('lacak-paket', [ItemController::class, 'lacakPaket'])->name('lacak-paket');
-            Route::get('sejarah-pengiriman', [ItemController::class, 'sejarahPengiriman'])->name('sejarah-pengiriman');
+            Route::get('riwayat-pengiriman', [ItemController::class, 'riwayatPengiriman'])->name('riwayat-pengiriman');
+            Route::get('profile', [ProfileController::class, 'index'])->name('profile');
+            Route::put('edit-profile', [ProfileController::class, 'update'])->name('edit-profile');
         });
     });
 });

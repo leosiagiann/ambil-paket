@@ -25,10 +25,10 @@ class ItemController extends Controller
         ]);
     }
 
-    public function sejarahPengiriman()
+    public function riwayatPengiriman()
     {
-        return view('customer.item.sejarah-pengiriman', [
-            'title' => 'Sejarah Pengiriman',
+        return view('customer.item.riwayat-pengiriman', [
+            'title' => 'Riwayat Pengiriman',
         ]);
     }
 
