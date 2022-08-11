@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class SuperAdminController extends Controller
 {
@@ -39,6 +40,55 @@ class SuperAdminController extends Controller
         $admin->status = 'freeze';
         $admin->save();
         return redirect()->route('super_admin.admin');
+    }
+
+    public function editAdmin(User $admin)
+    {
+        return view('super_admin.admin.edit', [
+            'title' => 'Edit Admin',
+            'admin' => $admin,
+        ]);
+    }
+
+    public function updateAdmin(User $admin, Request $request)
+    {
+        $changeEmail = true;
+        if ($admin->email == $request->email) {
+            $changeEmail = false;
+        }
+        if ($request->password == '') {
+            $this->validateAdminWithoutPassword($request, $changeEmail);
+
+            $admin->name = $request->name;
+            $admin->email = $request->email;
+            $admin->save();
+        } else {
+            $this->validateAdmin($request, $changeEmail);
+
+            $admin->name = $request->name;
+            $admin->email = $request->email;
+            $admin->password = Hash::make($request->password);
+            $admin->save();
+        }
+
+        return redirect()->route('super_admin.admin')->with('success', 'Admin has been updated!');
+    }
+
+    private function validateAdmin(Request $request, $changeEmail)
+    {
+        $this->validate($request, [
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255' . ($changeEmail ? '|unique:users' : ''),
+            'password' => 'required|string|min:6|confirmed',
+        ]);
+    }
+
+    private function validateAdminWithoutPassword(Request $request, $changeEmail)
+    {
+        $this->validate($request, [
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255' . ($changeEmail ? '|unique:users' : ''),
+        ]);
     }
 
     public function finance()

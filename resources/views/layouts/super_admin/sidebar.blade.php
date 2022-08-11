@@ -23,11 +23,11 @@
             <i class="fas fa-fw fa-users"></i>
             <span>Users</span>
         </a>
-        <div id="collapseTwo" class="collapse {{ ($title != 'Dashboard') ? 'show' : ''}}" aria-labelledby="headingTwo"
+        <div id="collapseTwo" class="collapse {{ $title != 'Dashboard' ? 'show' : ''}}" aria-labelledby="headingTwo"
             data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Role:</h6>
-                <a class="collapse-item {{ $title == 'Admin' ? 'active' : ''}}"
+                <a class="collapse-item {{ ($title == 'Admin' || $title == 'Edit Admin') ? 'active' : ''}}"
                     href="{{ route('super_admin.admin') }}">Admin</a>
                 <a class="collapse-item {{ $title == 'Finance' ? 'active' : ''}}"
                     href="{{ route('super_admin.finance') }}">Finance</a>

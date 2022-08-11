@@ -45,6 +45,12 @@
                                     <i class="fas fa-user-check"></i>
                                 </a>
                                 @endif
+                                |
+                                <!-- make button for edit admin and link to modal -->
+                                <a href="{{ route('super_admin.admin.edit', $admin->id) }}"
+                                    class="btn btn-primary btn-sm">
+                                    <i class="fas fa-edit"></i>
+                                </a>
                             </td>
                         </tr>
                         @endforeach
