@@ -56,7 +56,7 @@ class RegisterController extends Controller
         $profile->save();
 
 
-        return redirect()->route('auth.login')->with('success', 'Register successfull! Please login');
+        return redirect()->route('auth.login')->with('success', 'Successfull! Wait for activation account');
     }
 
     /**
