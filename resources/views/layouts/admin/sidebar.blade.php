@@ -7,8 +7,8 @@
         </div>
     </text>
     <hr class="sidebar-divider my-0">
-    <li class="nav-item {{ $title == 'Guest' ? 'active' : ''}}">
-        <a class="nav-link" href="{{ route('index') }}">
+    <li class="nav-item {{ $title == 'Dashboard' ? 'active' : ''}}">
+        <a class="nav-link" href="{{ route('admin.index') }}">
             <i class="fas fa-tachometer-alt"></i>
             <span>Dashboard</span>
         </a>
@@ -17,10 +17,10 @@
     <div class="sidebar-heading">
         Menu
     </div>
-    <li class="nav-item">
-        <a class="nav-link" href="#">
+    <li class="nav-item {{ $title == 'Customer' ? 'active' : ''}}">
+        <a class="nav-link" href="{{ route('admin.customer') }}">
             <i class="fas fa-users"></i>
-            <span>User</span>
+            <span>Customer</span>
         </a>
     </li>
 </ul>

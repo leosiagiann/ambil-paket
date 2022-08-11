@@ -63,6 +63,9 @@ Route::name('admin.')->prefix('admin')->group(function () {
     Route::group(['middleware' => 'auth'], function () {
         Route::group(['middleware' => 'admin'], function () {
             Route::get('', [AdminController::class, 'index'])->name('index');
+            Route::get('customer', [AdminController::class, 'customer'])->name('customer');
+            Route::get('customer/activate/{customer}', [AdminController::class, 'activateCustomer'])->name('customer.activate');
+            Route::get('customer/deactivate/{customer}', [AdminController::class, 'deactivateCustomer'])->name('customer.deactivate');
         });
     });
 });

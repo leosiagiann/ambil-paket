@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class AdminController extends Controller
 {
@@ -16,6 +17,28 @@ class AdminController extends Controller
         return view('admin.index', [
             'title' => 'Dashboard',
         ]);
+    }
+
+    public function customer()
+    {
+        return view('admin.customer.index', [
+            'title' => 'Customer',
+            'customers' => $this->getAllCustomer(),
+        ]);
+    }
+
+    public function activateCustomer(User $customer)
+    {
+        $customer->status = 'active';
+        $customer->save();
+        return redirect()->route('admin.customer');
+    }
+
+    public function deactivateCustomer(User $customer)
+    {
+        $customer->status = 'inactive';
+        $customer->save();
+        return redirect()->route('admin.customer');
     }
 
     /**
@@ -82,5 +105,13 @@ class AdminController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    private function getAllCustomer()
+    {
+        // get all customer and order by created_at desc
+        return User::where('role_id', '5')
+            ->orderBy('created_at', 'desc')
+            ->get();
     }
 }
