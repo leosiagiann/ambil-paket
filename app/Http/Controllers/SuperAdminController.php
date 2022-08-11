@@ -91,6 +91,12 @@ class SuperAdminController extends Controller
         ]);
     }
 
+    public function destroyAdmin(User $admin)
+    {
+        $admin->delete();
+        return redirect()->route('super_admin.admin')->with('success', 'Admin has been deleted!');
+    }
+
     public function finance()
     {
         return view('super_admin.finance.index', [
