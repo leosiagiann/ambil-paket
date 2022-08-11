@@ -8,6 +8,11 @@
             <h6 class="m-0 font-weight-bold text-primary">Data Customer</h6>
         </div>
         <div class=" card-body">
+            @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+            @endif
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
@@ -45,6 +50,40 @@
                                     <i class="fas fa-user-check"></i>
                                 </a>
                                 @endif
+                                |
+                                <!-- make icon for delete and link to modal -->
+                                <a class="btn btn-danger btn-sm" data-toggle="modal"
+                                    data-target="#deleteCustomer{{$customer->id}}">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                                <!-- make modal with id deleteCustomer -->
+                                <div class="modal fade" id="deleteCustomer{{$customer->id}}" tabindex="-1" role="dialog"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Delete Customer</h5>
+                                                <button class="close" type="button" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">×</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>Are you sure you want to delete this customer?</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button class="btn btn-secondary" type="button"
+                                                    data-dismiss="modal">Cancel</button>
+                                                <form action="{{ route('admin.customer.destroy', $customer->id) }}"
+                                                    method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button class="btn btn-danger" type="submit">Delete</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                         @endforeach

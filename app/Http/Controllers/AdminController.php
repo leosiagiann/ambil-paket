@@ -41,6 +41,13 @@ class AdminController extends Controller
         return redirect()->route('admin.customer');
     }
 
+    public function destroyCustomer(User $customer)
+    {
+        $customerDel = $customer;
+        $customer->delete();
+        return redirect()->route('admin.customer')->with('success', 'Customer with email ' . $customerDel->email . ' has been deleted.');
+    }
+
     /**
      * Show the form for creating a new resource.
      *
