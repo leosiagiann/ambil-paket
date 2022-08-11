@@ -75,6 +75,14 @@ Route::name('super_admin.')->prefix('super_admin')->group(function () {
     Route::group(['middleware' => 'auth'], function () {
         Route::group(['middleware' => 'super_admin'], function () {
             Route::get('', [SuperAdminController::class, 'index'])->name('index');
+            Route::get('admin', [SuperAdminController::class, 'admin'])->name('admin');
+            Route::get('admin/activate/{admin}', [SuperAdminController::class, 'activateAdmin'])->name('admin.activate');
+            Route::get('admin/deactivate/{admin}', [SuperAdminController::class, 'deactivateAdmin'])->name('admin.deactivate');
+            Route::put('admin/{admin}', [SuperAdminController::class, 'updateAdmin'])->name('admin.update');
+            Route::delete('admin/{admin}', [SuperAdminController::class, 'destroyAdmin'])->name('admin.destroy');
+            Route::get('finance', [SuperAdminController::class, 'finance'])->name('finance');
+            Route::delete('finance/{finance}', [SuperAdminController::class, 'destroyFinance'])->name('finance.destroy');
+            Route::put('finance/{finance}', [SuperAdminController::class, 'updateFinance'])->name('finance.update');
         });
     });
 });

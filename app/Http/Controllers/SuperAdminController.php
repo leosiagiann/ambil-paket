@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class SuperAdminController extends Controller
 {
@@ -16,6 +17,46 @@ class SuperAdminController extends Controller
         return view('super_admin.index', [
             'title' => 'Dashboard',
         ]);
+    }
+
+    public function admin()
+    {
+        return view('super_admin.admin.index', [
+            'title' => 'Admin',
+            'admins' => $this->getAllAdmin(),
+        ]);
+    }
+
+    public function activateAdmin(User $admin)
+    {
+        $admin->status = 'active';
+        $admin->save();
+        return redirect()->route('super_admin.admin');
+    }
+
+    public function deactivateAdmin(User $admin)
+    {
+        $admin->status = 'freeze';
+        $admin->save();
+        return redirect()->route('super_admin.admin');
+    }
+
+    public function finance()
+    {
+        return view('super_admin.finance.index', [
+            'title' => 'Finance',
+            'finance' => $this->getAllFinance(),
+        ]);
+    }
+
+    public function getAllAdmin()
+    {
+        return User::where('role_id', 2)->get();
+    }
+
+    public function getAllFinance()
+    {
+        return User::where('role_id', 3)->get();
     }
 
     /**

@@ -17,7 +17,7 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th style="width: 5%;">No</th>
+                            <th>No</th>
                             <th>Name</th>
                             <th>Email</th>
                             <th>Status</th>
