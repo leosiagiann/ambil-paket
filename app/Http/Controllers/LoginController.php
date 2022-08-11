@@ -17,6 +17,7 @@ class LoginController extends Controller
         if (auth()->check()) {
             return redirect()->route(auth()->user()->role->name . '.index');
         }
+
         return view('auth.login');
     }
 
@@ -41,8 +42,13 @@ class LoginController extends Controller
         $validate = $this->validateLogin($request);
 
         if (Auth::attempt($validate)) {
-            $request->session()->regenerate();
-            return redirect()->route(Auth::user()->role->name . '.index');
+            if ($this->isActive()) {
+                $request->session()->regenerate();
+                return redirect()->route(Auth::user()->role->name . '.index');
+            } else {
+                $this->resetAuth();
+                return back()->with('login_error', 'Your account has not been activated!');
+            }
         }
 
         return back()->with('login_error', 'Login failed! Please try again');
@@ -95,9 +101,7 @@ class LoginController extends Controller
 
     public function logout()
     {
-        Auth::logout();
-        request()->session()->invalidate();
-        request()->session()->regenerateToken();
+        $this->resetAuth();
         return redirect()->route('index');
     }
 
@@ -108,5 +112,22 @@ class LoginController extends Controller
             'password' => 'required|string|min:6',
         ]);
         return $validate;
+    }
+
+    private function isActive()
+    {
+        $user = auth()->user();
+        $status = $user->status;
+        if ($status == 'inactive') {
+            return false;
+        }
+        return true;
+    }
+
+    private function resetAuth()
+    {
+        Auth::logout();
+        request()->session()->invalidate();
+        request()->session()->regenerateToken();
     }
 }
