@@ -1,5 +1,5 @@
 @extends('layouts.template')
-@include('layouts.sidebar')
+@include('layouts.customer.sidebar')
 @include('layouts.navbar')
 @section('content')
 <div class="card shadow m-4">

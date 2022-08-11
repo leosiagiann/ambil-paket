@@ -15,6 +15,7 @@ class ItemController extends Controller
     {
         return view('customer.item.index', [
             'title' => 'Kirim Paket',
+            'page' => 'Paket',
         ]);
     }
 
@@ -22,6 +23,7 @@ class ItemController extends Controller
     {
         return view('customer.item.lacak-paket', [
             'title' => 'Lacak Paket',
+            'page' => 'Paket',
         ]);
     }
 
@@ -29,6 +31,7 @@ class ItemController extends Controller
     {
         return view('customer.item.riwayat-pengiriman', [
             'title' => 'Riwayat Pengiriman',
+            'page' => 'Paket',
         ]);
     }
 
