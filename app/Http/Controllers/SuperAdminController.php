@@ -60,14 +60,14 @@ class SuperAdminController extends Controller
     {
         $admin->status = 'active';
         $admin->save();
-        return redirect()->route('super_admin.admin');
+        return redirect()->route('super_admin.admin')->with('success', 'Admin has been activated!');
     }
 
     public function deactivateAdmin(User $admin)
     {
         $admin->status = 'freeze';
         $admin->save();
-        return redirect()->route('super_admin.admin');
+        return redirect()->route('super_admin.admin')->with('success', 'Admin has been deactivated!');
     }
 
     public function editAdmin(User $admin)
@@ -164,6 +164,20 @@ class SuperAdminController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
         ]);
+    }
+
+    public function activateFinance(User $finance)
+    {
+        $finance->status = 'active';
+        $finance->save();
+        return redirect()->route('super_admin.finance')->with('success', 'Finance has been activated!');
+    }
+
+    public function deactivateFinance(User $finance)
+    {
+        $finance->status = 'freeze';
+        $finance->save();
+        return redirect()->route('super_admin.finance')->with('success', 'Finance has been deactivated!');
     }
 
     public function getAllAdmin()
