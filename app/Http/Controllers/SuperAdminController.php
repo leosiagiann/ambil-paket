@@ -228,6 +228,12 @@ class SuperAdminController extends Controller
         ]);
     }
 
+    public function destroyFinance(User $finance)
+    {
+        $finance->delete();
+        return redirect()->route('super_admin.finance')->with('success', 'Finance has been deleted!');
+    }
+
     public function getAllAdmin()
     {
         return User::where('role_id', 5)
