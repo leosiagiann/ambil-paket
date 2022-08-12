@@ -17,6 +17,7 @@ class SuperAdminController extends Controller
     {
         return view('super_admin.index', [
             'title' => 'Dashboard',
+            'page' => 'Dashboard',
         ]);
     }
 
@@ -24,7 +25,16 @@ class SuperAdminController extends Controller
     {
         return view('super_admin.admin.index', [
             'title' => 'Admin',
+            'page' => 'Users',
             'admins' => $this->getAllAdmin(),
+        ]);
+    }
+
+    public function createAdmin()
+    {
+        return view('super_admin.admin.create', [
+            'title' => 'Create Admin',
+            'page' => 'Users',
         ]);
     }
 
@@ -46,6 +56,7 @@ class SuperAdminController extends Controller
     {
         return view('super_admin.admin.edit', [
             'title' => 'Edit Admin',
+            'page' => 'Users',
             'admin' => $admin,
         ]);
     }
@@ -101,6 +112,7 @@ class SuperAdminController extends Controller
     {
         return view('super_admin.finance.index', [
             'title' => 'Finance',
+            'page' => 'Users',
             'finance' => $this->getAllFinance(),
         ]);
     }

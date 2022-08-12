@@ -3,9 +3,16 @@
 @include('layouts.navbar')
 @section('content')
 <div class="container-fluid">
+    <!-- make title ADMIN WITHOUT CARD -->
+    <h6 class="mt-4 text-primary font-weight-bold">Data Admin</h6>
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Data Admin</h6>
+            <a href="{{ route('super_admin.admin.create') }}" class="btn btn-success btn-icon-split">
+                <span class="icon text-white-50">
+                    <i class="fas fa-plus"></i>
+                </span>
+                <span class="text">Tambah Admin</span>
+            </a>
         </div>
         <div class=" card-body">
             @if (session('success'))
