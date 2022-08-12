@@ -4,13 +4,14 @@
 @section('content')
 <div class="card shadow m-4">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Edit Admin</h6>
+        <a href="{{ route('super_admin.admin') }}" class="btn btn-warning btn-sm">
+            <i class="fa fa-arrow-left"></i> Back
+        </a>
     </div>
     <div class="card-body">
         <div class="row">
             <div class="col-lg-12">
-                <form action="{{ route('super_admin.admin.update', $admin->id) }}" method="POST"
-                    enctype="multipart/form-data">
+                <form action="{{ route('super_admin.admin.update', $admin->id) }}" method="POST">
                     @csrf
                     @method('PUT')
                     <div class="form-group">
