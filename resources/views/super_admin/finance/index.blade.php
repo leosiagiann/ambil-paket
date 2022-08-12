@@ -6,7 +6,7 @@
     <h6 class="mt-4 text-primary font-weight-bold">Data Finance</h6>
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <a href="{{ route('super_admin.admin.create') }}" class="btn btn-success btn-icon-split">
+            <a href="{{ route('super_admin.finance.create') }}" class="btn btn-success btn-icon-split">
                 <span class="icon text-white-50">
                     <i class="fas fa-plus"></i>
                 </span>

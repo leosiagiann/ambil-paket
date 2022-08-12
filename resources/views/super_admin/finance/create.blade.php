@@ -4,14 +4,14 @@
 @section('content')
 <div class="card shadow m-4">
     <div class="card-header py-3">
-        <a href="{{ route('super_admin.admin') }}" class="btn btn-warning btn-sm">
+        <a href="{{ route('super_admin.finance') }}" class="btn btn-warning btn-sm">
             <i class="fa fa-arrow-left"></i> Back
         </a>
     </div>
     <div class="card-body">
         <div class="row">
             <div class="col-lg-12">
-                <form action="{{ route('super_admin.admin.store') }}" method="POST">
+                <form action="{{ route('super_admin.finance.store') }}" method="POST">
                     @csrf
                     <div class="form-group">
                         <label for="name">Name</label>

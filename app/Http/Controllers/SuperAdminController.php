@@ -135,13 +135,25 @@ class SuperAdminController extends Controller
         ]);
     }
 
+    public function createFinance()
+    {
+        return view('super_admin.finance.create', [
+            'title' => 'Create Finance',
+            'page' => 'Users',
+        ]);
+    }
+
     public function getAllAdmin()
     {
-        return User::where('role_id', 2)->get();
+        return User::where('role_id', 5)
+            ->orderBy('created_at', 'desc')
+            ->get();
     }
 
     public function getAllFinance()
     {
-        return User::where('role_id', 3)->get();
+        return User::where('role_id', 3)
+            ->orderBy('created_at', 'desc')
+            ->get();
     }
 }

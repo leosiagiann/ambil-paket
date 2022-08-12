@@ -29,7 +29,7 @@
                 <h6 class="collapse-header">Role:</h6>
                 <a class="collapse-item {{ ($title == 'Admin' || $title == 'Edit Admin' || $title == 'Create Admin') ? 'active' : ''}}"
                     href="{{ route('super_admin.admin') }}">Admin</a>
-                <a class="collapse-item {{ $title == 'Finance' ? 'active' : ''}}"
+                <a class="collapse-item {{ ($title == 'Finance' || $title == 'Edit Finance' || $title == 'Create Finance') ? 'active' : ''}}"
                     href="{{ route('super_admin.finance') }}">Finance</a>
             </div>
         </div>
