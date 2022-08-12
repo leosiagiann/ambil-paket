@@ -189,6 +189,45 @@ class SuperAdminController extends Controller
         ]);
     }
 
+    public function updateFinance(User $finance, Request $request)
+    {
+        $changeEmail = true;
+        if ($finance->email == $request->email) {
+            $changeEmail = false;
+        }
+        if ($request->password == '') {
+            $this->validateUpdateFinanceWithoutPassword($request, $changeEmail);
+
+            $finance->name = $request->name;
+            $finance->email = $request->email;
+            $finance->save();
+        } else {
+            $this->validateUpdateFinance($request, $changeEmail);
+            $finance->name = $request->name;
+            $finance->email = $request->email;
+            $finance->password = Hash::make($request->password);
+            $finance->save();
+        }
+        return redirect()->route('super_admin.finance')->with('success', 'Finance has been updated!');
+    }
+
+    private function validateUpdateFinance(Request $request, $changeEmail)
+    {
+        $this->validate($request, [
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255' . ($changeEmail ? '|unique:users' : ''),
+            'password' => 'required|string|min:6|confirmed',
+        ]);
+    }
+
+    private function validateUpdateFinanceWithoutPassword(Request $request, $changeEmail)
+    {
+        $this->validate($request, [
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255' . ($changeEmail ? '|unique:users' : ''),
+        ]);
+    }
+
     public function getAllAdmin()
     {
         return User::where('role_id', 5)
