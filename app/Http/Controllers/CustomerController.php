@@ -25,6 +25,7 @@ class CustomerController extends Controller
         }
         return view('customer.index', [
             'title' => 'Dashboard',
+            'page' => 'Dashboard',
         ]);
     }
 

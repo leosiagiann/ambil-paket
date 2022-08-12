@@ -20,6 +20,7 @@ class ProfileController extends Controller
     {
         return view('customer.profile.index', [
             'title' => 'Profile',
+            'page' => 'Profile',
         ]);
     }
 
