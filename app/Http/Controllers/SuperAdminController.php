@@ -180,6 +180,15 @@ class SuperAdminController extends Controller
         return redirect()->route('super_admin.finance')->with('success', 'Finance has been deactivated!');
     }
 
+    public function editFinance(User $finance)
+    {
+        return view('super_admin.finance.edit', [
+            'title' => 'Edit Finance',
+            'page' => 'Users',
+            'finance' => $finance,
+        ]);
+    }
+
     public function getAllAdmin()
     {
         return User::where('role_id', 5)
