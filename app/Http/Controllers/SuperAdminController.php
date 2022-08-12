@@ -86,13 +86,13 @@ class SuperAdminController extends Controller
             $changeEmail = false;
         }
         if ($request->password == '') {
-            $this->validateAdminWithoutPassword($request, $changeEmail);
+            $this->validateUpdateAdminWithoutPassword($request, $changeEmail);
 
             $admin->name = $request->name;
             $admin->email = $request->email;
             $admin->save();
         } else {
-            $this->validateAdmin($request, $changeEmail);
+            $this->validateUpdateAdmin($request, $changeEmail);
 
             $admin->name = $request->name;
             $admin->email = $request->email;
@@ -103,7 +103,7 @@ class SuperAdminController extends Controller
         return redirect()->route('super_admin.admin')->with('success', 'Admin has been updated!');
     }
 
-    private function validateAdmin(Request $request, $changeEmail)
+    private function validateUpdateAdmin(Request $request, $changeEmail)
     {
         $this->validate($request, [
             'name' => 'required|string|max:255',
@@ -112,7 +112,7 @@ class SuperAdminController extends Controller
         ]);
     }
 
-    private function validateAdminWithoutPassword(Request $request, $changeEmail)
+    private function validateUpdateAdminWithoutPassword(Request $request, $changeEmail)
     {
         $this->validate($request, [
             'name' => 'required|string|max:255',
@@ -140,6 +140,29 @@ class SuperAdminController extends Controller
         return view('super_admin.finance.create', [
             'title' => 'Create Finance',
             'page' => 'Users',
+        ]);
+    }
+
+    public function storeFinance(Request $request)
+    {
+        $this->validateCreateFinance($request);
+
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'role_id' => 3,
+            'status' => 'active',
+        ]);
+        return redirect()->route('super_admin.finance')->with('success', 'Finance has been created!');
+    }
+
+    private function validateCreateFinance(Request $request)
+    {
+        return $this->validate($request, [
+            'name' => 'required|string|max:255|min:3',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:6|confirmed',
         ]);
     }
 
