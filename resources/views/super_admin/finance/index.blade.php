@@ -3,52 +3,100 @@
 @include('layouts.navbar')
 @section('content')
 <div class="container-fluid">
-    <!-- DataTales Example -->
+    <h6 class="mt-4 text-primary font-weight-bold">Data Finance</h6>
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <div class="row">
-                <div class="col-lg-9">
-                    <a href="#" class="btn btn-primary btn-icon-split">
-                        <span class="icon text-white-50">
-                            <i class="fas fa-truck"></i>
-                        </span>
-                        <span class="text">Kirim Paket</span>
-                    </a>
-                </div>
-                <div class="col-lg-3">
-                    @if($errors->any())
-                    <span class="btn btn-danger disabled">
-                        {{ $errors->first() }}
-                    </span>
-                    @endif
-                    @if(session('msg'))
-                    <span class="btn btn-success disabled">
-                        {{ session('msg') }}
-                    </span>
-                    @endif
-                </div>
-            </div>
+            <a href="{{ route('super_admin.admin.create') }}" class="btn btn-success btn-icon-split">
+                <span class="icon text-white-50">
+                    <i class="fas fa-plus"></i>
+                </span>
+                <span class="text">Create Finance</span>
+            </a>
         </div>
         <div class=" card-body">
+            @if (session('success'))
+            <div class="alert alert-success" role="alert">
+                {{ session('success') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+            </div>
+            @endif
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>Nomor</th>
-                            <th>Service</th>
-                            <th>Detail</th>
+                            <th>No</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Status</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($finances as $finance)
                         <tr>
-                            <td>isi</td>
-                            <td>isi</td>
-                            <td>isi</td>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $finance->name }}</td>
+                            <td>{{ $finance->email }}</td>
                             <td>
-                                isi
+                                @if ($finance->status == 'active')
+                                <span class="badge badge-success">Active</span>
+                                @else
+                                <span class="badge badge-danger">Inactive</span>
+                                @endif
+                            </td>
+                            <td>
+                                @if ($finance->status == 'active')
+                                <a href="{{ route('super_admin.finance.deactivate', $finance->id) }}"
+                                    class="btn btn-danger btn-sm">
+                                    <i class="fas fa-user-times"></i>
+                                </a>
+                                @else
+                                <a href="{{ route('super_admin.finance.activate', $finance->id) }}"
+                                    class="btn btn-success btn-sm">
+                                    <i class="fas fa-user-check"></i>
+                                </a>
+                                @endif
+                                |
+                                <a href="{{ route('super_admin.finance.edit', $finance->id) }}"
+                                    class="btn btn-primary btn-sm">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                |
+                                <a class="btn btn-danger btn-sm" data-toggle="modal"
+                                    data-target="#deleteFinance{{$finance->id}}">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                                <div class="modal fade" id="deleteFinance{{$finance->id}}" tabindex="-1" role="dialog"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Delete Finance</h5>
+                                                <button class="close" type="button" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">×</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>Are you sure you want to delete this finance?</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button class="btn btn-secondary" type="button"
+                                                    data-dismiss="modal">Cancel</button>
+                                                <form action="{{ route('super_admin.finance.destroy', $finance->id) }}"
+                                                    method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button class="btn btn-danger" type="submit">Delete</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

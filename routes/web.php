@@ -85,8 +85,13 @@ Route::name('super_admin.')->prefix('super_admin')->group(function () {
             Route::delete('admin/{admin}', [SuperAdminController::class, 'destroyAdmin'])->name('admin.destroy');
 
             Route::get('finance', [SuperAdminController::class, 'finance'])->name('finance');
-            Route::delete('finance/{finance}', [SuperAdminController::class, 'destroyFinance'])->name('finance.destroy');
+            Route::get('finance/create', [SuperAdminController::class, 'createFinance'])->name('finance.create');
+            Route::post('finance/create', [SuperAdminController::class, 'storeFinance'])->name('finance.store');
+            Route::get('finance/activate/{finance}', [SuperAdminController::class, 'activateFinance'])->name('finance.activate');
+            Route::get('finance/deactivate/{finance}', [SuperAdminController::class, 'deactivateFinance'])->name('finance.deactivate');
+            Route::get('finance/{finance}', [SuperAdminController::class, 'editFinance'])->name('finance.edit');
             Route::put('finance/{finance}', [SuperAdminController::class, 'updateFinance'])->name('finance.update');
+            Route::delete('finance/{finance}', [SuperAdminController::class, 'destroyFinance'])->name('finance.destroy');
         });
     });
 });

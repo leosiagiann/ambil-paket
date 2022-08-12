@@ -3,7 +3,6 @@
 @include('layouts.navbar')
 @section('content')
 <div class="container-fluid">
-    <!-- make title ADMIN WITHOUT CARD -->
     <h6 class="mt-4 text-primary font-weight-bold">Data Admin</h6>
     <div class="card shadow mb-4">
         <div class="card-header py-3">
@@ -11,7 +10,7 @@
                 <span class="icon text-white-50">
                     <i class="fas fa-plus"></i>
                 </span>
-                <span class="text">Tambah Admin</span>
+                <span class="text">Create Admin</span>
             </a>
         </div>
         <div class=" card-body">
@@ -68,7 +67,6 @@
                                     data-target="#deleteAdmin{{$admin->id}}">
                                     <i class="fas fa-trash"></i>
                                 </a>
-                                <!-- make modal -->
                                 <div class="modal fade" id="deleteAdmin{{$admin->id}}" tabindex="-1" role="dialog"
                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">

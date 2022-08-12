@@ -131,7 +131,7 @@ class SuperAdminController extends Controller
         return view('super_admin.finance.index', [
             'title' => 'Finance',
             'page' => 'Users',
-            'finance' => $this->getAllFinance(),
+            'finances' => $this->getAllFinance(),
         ]);
     }
 
