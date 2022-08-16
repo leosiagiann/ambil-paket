@@ -17,11 +17,22 @@
     <div class="sidebar-heading">
         Menu
     </div>
-    <li class="nav-item {{ $title == 'Customer' ? 'active' : ''}}">
-        <a class="nav-link" href="{{ route('admin.customer') }}">
-            <i class="fas fa-users"></i>
-            <span>Customer</span>
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
+            aria-controls="collapseTwo">
+            <i class="fas fa-fw fa-users"></i>
+            <span>Users</span>
         </a>
+        <div id="collapseTwo" class="collapse {{ $page == 'Users' ? 'show' : ''}}" aria-labelledby="headingTwo"
+            data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Role:</h6>
+                <a class="collapse-item {{ ($title == 'Customer') ? 'active' : ''}}"
+                    href="{{ route('admin.customer') }}">Customer</a>
+                <a class="collapse-item {{ ($title == 'Agen' || $title == 'Edit Finance' || $title == 'Create Finance') ? 'active' : ''}}"
+                    href="{{ route('admin.agen') }}">Agen</a>
+            </div>
+        </div>
     </li>
 </ul>
 <!-- Side Bar -->

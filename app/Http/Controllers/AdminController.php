@@ -11,6 +11,7 @@ class AdminController extends Controller
     {
         return view('admin.index', [
             'title' => 'Dashboard',
+            'page' => 'Dashboard',
         ]);
     }
 
@@ -19,6 +20,7 @@ class AdminController extends Controller
         return view('admin.customer.index', [
             'title' => 'Customer',
             'customers' => $this->getAllCustomer(),
+            'page' => 'Users',
         ]);
     }
 
