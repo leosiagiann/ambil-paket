@@ -69,6 +69,9 @@ Route::name('admin.')->prefix('admin')->group(function () {
             Route::delete('customer/{customer}', [AdminController::class, 'destroyCustomer'])->name('customer.destroy');
 
             Route::get('agen', [AdminController::class, 'agen'])->name('agen');
+            Route::get('agen/activate/{agen}', [AdminController::class, 'activateAgen'])->name('agen.activate');
+            Route::get('agen/deactivate/{agen}', [AdminController::class, 'deactivateAgen'])->name('agen.deactivate');
+            Route::delete('agen/{agen}', [AdminController::class, 'destroyAgen'])->name('agen.destroy');
         });
     });
 });
