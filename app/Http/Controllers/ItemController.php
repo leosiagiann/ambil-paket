@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
 use App\Models\Sender;
 use App\Models\Receiver;
@@ -15,6 +14,7 @@ class ItemController extends Controller
         return view('customer.item.index', [
             'title' => 'Kirim Paket',
             'page' => 'Paket',
+            'items' => Item::all(),
         ]);
     }
 
@@ -32,6 +32,34 @@ class ItemController extends Controller
             $this->validateSender($request);
             $this->validateReceiver($request);
             $this->validateItem($request);
+
+            // create sender
+            $sender = Sender::create([
+                'name' => $request->sender_name,
+                'phone' => $request->sender_phone,
+                'address' => $request->sender_address,
+                'detail_address' => $request->sender_detail_address,
+            ]);
+
+            // create receiver
+            $receiver = Receiver::create([
+                'name' => $request->receiver_name,
+                'phone' => $request->receiver_phone,
+                'address' => $request->receiver_address,
+                'detail_address' => $request->receiver_detail_address,
+            ]);
+
+            // create item
+            Item::create([
+                'user_id' => auth()->user()->id,
+                'sender_id' => $sender->id,
+                'receiver_id' => $receiver->id,
+                'weight' => $request->weight,
+                'status' => 'request',
+                'note' => $request->note,
+            ]);
+
+            return redirect()->route('customer.item')->with('success', 'Paket anda sudah kami terima, silahkan tunggu konfirmasi dari kami');
         } else {
             $request->merge([
                 'sender_name' => null,
@@ -41,6 +69,36 @@ class ItemController extends Controller
             ]);
             $this->validateReceiver($request);
             $this->validateItem($request);
+
+            if (!$this->validateSelf()) {
+                return redirect()->route('customer.item')->with('error', 'Anda tidak bisa mengirim paket, lengkapi data diri anda!');
+            } else {
+                // create receiver
+                $receiver = Receiver::create([
+                    'name' => $request->receiver_name,
+                    'phone' => $request->receiver_phone,
+                    'address' => $request->receiver_address,
+                    'detail_address' => $request->receiver_detail_address,
+                ]);
+
+                // creaete sender
+                $sender = Sender::create([
+                    'name' => auth()->user()->name,
+                    'phone' => auth()->user()->phone,
+                    'address' => auth()->user()->address,
+                    'detail_address' => auth()->user()->detail_address,
+                ]);
+
+                // create item
+                Item::create([
+                    'user_id' => auth()->user()->id,
+                    'sender_id' => $sender->id,
+                    'receiver_id' => $receiver->id,
+                    'weight' => $request->weight,
+                    'status' => 'request',
+                    'note' => $request->note,
+                ]);
+            }
         }
     }
 
@@ -58,6 +116,15 @@ class ItemController extends Controller
             'title' => 'Riwayat Pengiriman',
             'page' => 'Paket',
         ]);
+    }
+
+    private function validateSelf()
+    {
+        if (auth()->user()->profile->phone_number && auth()->user()->profile->address) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     private function validateSender(Request $request)
