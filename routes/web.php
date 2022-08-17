@@ -34,11 +34,14 @@ Route::name('customer.')->prefix('customer')->group(function () {
     Route::group(['middleware' => 'auth'], function () {
         Route::group(['middleware' => 'customer'], function () {
             Route::get('', [CustomerController::class, 'index'])->name('index');
-            Route::get('kirim-paket', [ItemController::class, 'index'])->name('item');
-            Route::get('lacak-paket', [ItemController::class, 'lacakPaket'])->name('lacak-paket');
-            Route::get('riwayat-pengiriman', [ItemController::class, 'riwayatPengiriman'])->name('riwayat-pengiriman');
             Route::get('profile', [ProfileController::class, 'index'])->name('profile');
             Route::put('edit-profile', [ProfileController::class, 'update'])->name('edit-profile');
+
+            Route::get('kirim-paket', [ItemController::class, 'index'])->name('item');
+            Route::get('kirim-paket/create', [ItemController::class, 'createItem'])->name('item.create');
+            Route::post('kirim-paket/create', [ItemController::class, 'storeItem'])->name('item.store');
+            Route::get('lacak-paket', [ItemController::class, 'lacakPaket'])->name('lacak-paket');
+            Route::get('riwayat-pengiriman', [ItemController::class, 'riwayatPengiriman'])->name('riwayat-pengiriman');
         });
     });
 });
