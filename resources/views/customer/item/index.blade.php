@@ -3,7 +3,6 @@
 @include('layouts.navbar')
 @section('content')
 <div class="container-fluid">
-    <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <div class="row">
@@ -34,7 +33,7 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>Nomor</th>
+                            <th>No</th>
                             <th>Service</th>
                             <th>Detail</th>
                             <th>Action</th>

@@ -16,6 +16,16 @@ class Item extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function sender()
+    {
+        return $this->belongsTo(Sender::class);
+    }
+
+    public function receiver()
+    {
+        return $this->belongsTo(Receiver::class);
+    }
+
     public function trackingItems()
     {
         return $this->hasMany(TrackingItem::class);
