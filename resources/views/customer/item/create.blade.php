@@ -22,18 +22,39 @@
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label for="sender_name">Nama Pengirim</label>
-                                        <input type="text" class="form-control" id="sender_name" name="sender_name"
-                                            placeholder="Nama Pengirim">
+                                        <input type="text"
+                                            class="form-control @error('sender_name') is-invalid @enderror"
+                                            id="sender_name" name="sender_name" placeholder="Nama Pengirim"
+                                            value="{{ old('sender_name') }}">
+                                        @error('sender_name')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
                                     </div>
                                     <div class="form-group">
                                         <label for="sender_phone">Nomor Telepon</label>
-                                        <input type="text" class="form-control" id="sender_phone" name="sender_phone"
-                                            placeholder="Nomor Telepon">
+                                        <input type="text"
+                                            class="form-control @error('sender_phone') is-invalid @enderror"
+                                            id="sender_phone" name="sender_phone" placeholder="Nomor Telepon"
+                                            value="{{ old('sender_phone') }}">
+                                        @error('sender_phone')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
                                     </div>
                                     <div class="form-group">
                                         <label for="sender_address">Alamat Pengirim</label>
-                                        <input type="text" class="form-control" id="sender_address"
-                                            name="sender_address" placeholder="Alamat Pengirim">
+                                        <input type="text"
+                                            class="form-control @error('sender_address') is-invalid @enderror"
+                                            id="sender_address" name="sender_address" placeholder="Alamat Pengirim"
+                                            value="{{ old('sender_address') }}">
+                                        @error('sender_address')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
                                     </div>
                                     <div class="form-group">
                                         <label for="sender_detail_address">Detail Alamat Pengirim</label>
@@ -46,8 +67,13 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="use_self"
-                                                name="use_self" onkeyup="otherSender()">
+                                            <input class="form-check-input" type="checkbox" value="use_self"
+                                                id="use_self" name="use_self" onkeyup="otherSender()">
+                                            @if (old('use_self'))
+                                            <script>
+                                            document.getElementById('use_self').checked = true;
+                                            </script>
+                                            @endif
                                             <label class="form-check-label" for="use_self">
                                                 Gunakan data saya
                                             </label>
@@ -64,18 +90,39 @@
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label for="receiver_name">Nama Penerima</label>
-                                        <input type="text" class="form-control" id="receiver_name" name="receiver_name"
-                                            placeholder="Nama Penerima">
+                                        <input type="text"
+                                            class="form-control @error('receiver_name') is-invalid @enderror"
+                                            id="receiver_name" name="receiver_name" placeholder="Nama Penerima"
+                                            value="{{ old('receiver_name') }}">
+                                        @error('receiver_name')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
                                     </div>
                                     <div class="form-group">
                                         <label for="receiver_phone">Nomor Telepon</label>
-                                        <input type="text" class="form-control" id="receiver_phone"
-                                            name="receiver_phone" placeholder="Nomor Telepon">
+                                        <input type="text"
+                                            class="form-control @error('receiver_phone') is-invalid @enderror"
+                                            id="receiver_phone" name="receiver_phone" placeholder="Nomor Telepon"
+                                            value="{{ old('receiver_phone') }}">
+                                        @error('receiver_phone')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
                                     </div>
                                     <div class="form-group">
                                         <label for="receiver_address">Alamat Penerima</label>
-                                        <input type="text" class="form-control" id="receiver_address"
-                                            name="receiver_address" placeholder="Alamat Penerima">
+                                        <input type="text"
+                                            class="form-control @error('receiver_address') is-invalid @enderror"
+                                            id="receiver_address" name="receiver_address" placeholder="Alamat Penerima"
+                                            value="{{ old('receiver_address') }}">
+                                        @error('receiver_address')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
                                     </div>
                                     <div class="form-group">
                                         <label for="receiver_detail_address">Detail Alamat Penerima</label>
@@ -97,11 +144,17 @@
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label for="item_weight">Berat Barang</label>
-                                        <input type="text" class="form-control" id="item_weight" name="weight"
-                                            placeholder="Berat Barang">
+                                        <input type="text" class="form-control @error('weight') is-invalid @enderror"
+                                            id="item_weight" name="weight" placeholder="Berat Barang"
+                                            value="{{ old('weight') }}">
                                         <small class="form-text text-muted">
                                             <i>*Dalam satuan kg</i>
                                         </small>
+                                        @error('weight')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
                                     </div>
                                     <div class="form-group">
                                         <label for="item_note">Catatan</label>
