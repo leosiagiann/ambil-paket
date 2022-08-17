@@ -34,9 +34,12 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Service</th>
-                            <th>Detail</th>
-                            <th>Action</th>
+                            <th>Pengirim</th>
+                            <th>Penerima</th>
+                            <th>Harga</th>
+                            <th>Estimasi Waktu</th>
+                            <th>Status</th>
+                            <th>Keterangan</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -44,9 +47,10 @@
                             <td>isi</td>
                             <td>isi</td>
                             <td>isi</td>
-                            <td>
-                                isi
-                            </td>
+                            <td>isi</td>
+                            <td>isi</td>
+                            <td>isi</td>
+                            <td>isi</td>
                         </tr>
                     </tbody>
                 </table>
