@@ -57,4 +57,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(Profile::class);
     }
+
+    public function bank()
+    {
+        return $this->hasOne(Bank::class);
+    }
 }
