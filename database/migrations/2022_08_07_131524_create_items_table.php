@@ -28,11 +28,16 @@ class CreateItemsTable extends Migration
                 ->constrained()
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
+            $table->foreignId('bank_id')
+                ->constrained()
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
             $table->string('weight');
             $table->double('price')->nullable();
             $table->string('time_delivery')->nullable();
             $table->string('status');
             $table->string('note')->nullable();
+            $table->string('proof')->nullable();
             $table->timestamps();
         });
     }
