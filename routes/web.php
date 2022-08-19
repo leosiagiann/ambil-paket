@@ -51,6 +51,7 @@ Route::name('agen.')->prefix('agen')->group(function () {
         Route::group(['middleware' => 'agen'], function () {
             Route::get('', [AgenController::class, 'index'])->name('index');
             Route::get('konfirmasi-paket', [AgenController::class, 'confirmPaket'])->name('confirm');
+            Route::post('konfirmasi-paket/{item}', [AgenController::class, 'rejectConfirm'])->name('confirm.reject');
         });
     });
 });

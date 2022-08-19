@@ -11,11 +11,17 @@
             @if (session('success'))
             <div class="alert alert-success" role="alert">
                 {{ session('success') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             @endif
             @if (session('error'))
             <div class="alert alert-danger" role="alert">
                 {{ session('error') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             @endif
             <div class="table-responsive">
@@ -110,6 +116,35 @@
                                 </button>
                                 @endif
                             </td>
+                            <!-- modal confirmX -->
+                            <div class="modal fade" id="confirmX{{ $item->id }}" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Tolak Paket</h5>
+                                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">×</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="{{ route('agen.confirm.reject', $item->id) }}" method="POST">
+                                                @csrf
+                                                <div class="form-group">
+                                                    <label for="">Catatan</label>
+                                                    <textarea class="form-control" name="note" rows="3"></textarea>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button class="btn btn-secondary" type="button"
+                                                        data-dismiss="modal">Batal</button>
+                                                    <button class="btn btn-primary" type="submit">Tolak</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end modal confirmX -->
                             <!-- modal sender{{ $item->id }} -->
                             <div class="modal fade" id="sender{{ $item->id }}" tabindex="-1" role="dialog"
                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
