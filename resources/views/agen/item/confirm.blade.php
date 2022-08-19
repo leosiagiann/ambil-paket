@@ -145,6 +145,40 @@
                                 </div>
                             </div>
                             <!-- end modal confirmX -->
+                            <!-- modal confirmY -->
+                            <div class="modal fade" id="confirmY{{ $item->id }}" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Terima Paket</h5>
+                                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">×</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="{{ route('agen.confirm.accept', $item->id) }}" method="POST">
+                                                @csrf
+                                                <div class="form-group">
+                                                    <label for="">Harga</label>
+                                                    <input type="number" class="form-control" name="price"
+                                                        placeholder="Harga">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="">Estimasi Waktu</label>
+                                                    <input type="number" class="form-control" name="time_delivery"
+                                                        placeholder="Estimasi Waktu">
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button class="btn btn-secondary" type="button"
+                                                        data-dismiss="modal">Batal</button>
+                                                    <button class="btn btn-primary" type="submit">Terima</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <!-- modal sender{{ $item->id }} -->
                             <div class="modal fade" id="sender{{ $item->id }}" tabindex="-1" role="dialog"
                                 aria-labelledby="exampleModalLabel" aria-hidden="true">

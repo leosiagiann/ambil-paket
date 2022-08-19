@@ -32,6 +32,13 @@ class AgenController extends Controller
         return redirect()->route('agen.confirm')->with('success', 'Paket berhasil ditolak');
     }
 
+    public function acceptConfirm(Item $item)
+    {
+        $item->status = 'accepted';
+        $item->save();
+        return redirect()->route('agen.confirm')->with('success', 'Paket berhasil diterima, Menunggu Konfirmasi dari Customer');
+    }
+
     private function getAllItemRequest()
     {
         // get all item with status request and accepted
