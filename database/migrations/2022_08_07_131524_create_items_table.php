@@ -31,8 +31,7 @@ class CreateItemsTable extends Migration
             $table->foreignId('bank_id')
                 ->constrained()
                 ->onDelete('cascade')
-                ->onUpdate('cascade')
-                ->nullable();
+                ->onUpdate('cascade');
             $table->string('weight');
             $table->double('price')->nullable();
             $table->string('time_delivery')->nullable();

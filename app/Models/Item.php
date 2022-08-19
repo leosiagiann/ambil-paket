@@ -30,4 +30,9 @@ class Item extends Model
     {
         return $this->hasMany(TrackingItem::class);
     }
+
+    public function bank()
+    {
+        return $this->belongsTo(Bank::class);
+    }
 }

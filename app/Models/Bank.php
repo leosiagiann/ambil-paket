@@ -15,4 +15,9 @@ class Bank extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function item()
+    {
+        return $this->hasOne(Item::class);
+    }
 }
