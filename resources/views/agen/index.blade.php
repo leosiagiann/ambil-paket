@@ -1,6 +1,6 @@
 @extends('layouts.template')
-@include('layouts.sidebar')
+@include('layouts.agen.sidebar')
 @include('layouts.navbar')
 @section('content')
-Agen
+Agens
 @endsection

@@ -1,16 +1,11 @@
 @extends('layouts.template')
-@include('layouts.customer.sidebar')
+@include('layouts.agen.sidebar')
 @include('layouts.navbar')
 @section('content')
 <div class="container-fluid">
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <a href="{{ route('customer.item.create') }}" class="btn btn-success btn-icon-split">
-                <span class="icon text-white-50">
-                    <i class="fas fa-truck"></i>
-                </span>
-                <span class="text">Kirim Paket</span>
-            </a>
+            <h6 class="m-0 font-weight-bold text-primary">Konfirmasi Paket</h6>
         </div>
         <div class=" card-body">
             @if (session('success'))
@@ -34,6 +29,7 @@
                             <th>Estimasi Waktu</th>
                             <th>Status</th>
                             <th>Catatan</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -54,21 +50,21 @@
                             </td>
                             <td>
                                 @if (!$item->harga)
-                                <span class="badge badge-warning">Belum Disetujui</span>
+                                <span class="badge badge-warning">Belum Ditentukan</span>
                                 @else
                                 Rp. {{ number_format($item->harga, 0, ',', '.') }}
                                 @endif
                             </td>
                             <td>
                                 @if (!$item->estimasi_waktu)
-                                <span class="badge badge-warning">Belum Disetujui</span>
+                                <span class="badge badge-warning">Belum Ditentukan</span>
                                 @else
                                 {{ $item->estimasi_waktu }} hari
                                 @endif
                             </td>
                             <td>
                                 @if ($item->status == 'request')
-                                <span class="badge badge-warning">Belum Disetujui</span>
+                                <span class="badge badge-warning">Belum Ditentukan</span>
                                 @elseif ($item->status == 'accept')
                                 <span class="badge badge-success">{{ $item->status }}</span>
                                 @elseif ($item->status == 'reject')
@@ -85,6 +81,33 @@
                                 </button>
                                 @else
                                 -
+                                @endif
+                            </td>
+                            <td>
+                                @if ($item->status == 'request')
+                                <button type="button" class="btn btn-success btn-icon-split" data-toggle="modal"
+                                    data-target="#confirmY{{ $item->id }}">
+                                    <span class="text">Terima</span>
+                                </button>
+                                <button type="button" class="btn btn-danger btn-icon-split" data-toggle="modal"
+                                    data-target="#confirmX{{ $item->id }}">
+                                    <span class="text">Tolak</span>
+                                </button>
+                                @elseif ($item->status == 'accept')
+                                <button type="button" class="btn btn-primary btn-icon-split" data-toggle="modal"
+                                    data-target="#done{{ $item->id }}">
+                                    <span class="text">Selesai</span>
+                                </button>
+                                @elseif ($item->status == 'reject')
+                                <button type="button" class="btn btn-danger btn-icon-split" data-toggle="modal"
+                                    data-target="#reject{{ $item->id }}">
+                                    <span class="text">Tolak</span>
+                                </button>
+                                @elseif ($item->status == 'done')
+                                <button type="button" class="btn btn-primary btn-icon-split" data-toggle="modal"
+                                    data-target="#done{{ $item->id }}">
+                                    <span class="text">Selesai</span>
+                                </button>
                                 @endif
                             </td>
                             <!-- modal sender{{ $item->id }} -->

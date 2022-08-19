@@ -50,6 +50,7 @@ Route::name('agen.')->prefix('agen')->group(function () {
     Route::group(['middleware' => 'auth'], function () {
         Route::group(['middleware' => 'agen'], function () {
             Route::get('', [AgenController::class, 'index'])->name('index');
+            Route::get('konfirmasi-paket', [AgenController::class, 'confirmPaket'])->name('confirm');
         });
     });
 });

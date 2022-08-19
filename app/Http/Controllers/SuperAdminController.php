@@ -234,14 +234,14 @@ class SuperAdminController extends Controller
         return redirect()->route('super_admin.finance')->with('success', 'Finance has been deleted!');
     }
 
-    public function getAllAdmin()
+    private function getAllAdmin()
     {
         return User::where('role_id', 5)
             ->orderBy('created_at', 'desc')
             ->get();
     }
 
-    public function getAllFinance()
+    private function getAllFinance()
     {
         return User::where('role_id', 3)
             ->orderBy('created_at', 'desc')
