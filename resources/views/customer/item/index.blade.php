@@ -39,6 +39,7 @@
                             <th>Estimasi Waktu</th>
                             <th>Status</th>
                             <th>Catatan</th>
+                            <th>Pembayaran</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -94,6 +95,16 @@
                                 @if ($item->note)
                                 <button type="button" class="btn btn-primary btn-icon-split" data-toggle="modal"
                                     data-target="#description{{ $item->id }}">
+                                    <span class="text">Lihat</span>
+                                </button>
+                                @else
+                                -
+                                @endif
+                            </td>
+                            <td>
+                                @if ($item->proof)
+                                <button type="button" class="btn btn-primary btn-icon-split" data-toggle="modal"
+                                    data-target="#bukti{{ $item->id }}">
                                     <span class="text">Lihat</span>
                                 </button>
                                 @else

@@ -122,7 +122,7 @@ class ItemController extends Controller
     public function confirmNo(Item $item)
     {
         $item->update([
-            'status' => 'cancel',
+            'status' => 'canceled',
         ]);
         return redirect()->route('customer.item')->with('success', 'Berhasil mengkonfirmasi paket, paket anda dibatalkan!');
     }
@@ -217,7 +217,7 @@ class ItemController extends Controller
 
     private function getAllItems()
     {
-        return Item::whereNotIn('status', ['cancel'])
+        return Item::whereNotIn('status', ['canceled', 'rejected'])
             ->latest()
             ->get();
     }
