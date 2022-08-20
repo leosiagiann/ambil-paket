@@ -33,6 +33,8 @@ class ItemController extends Controller
             return redirect()->route('customer.item')->with('error', 'Agen tidak tersedia!');
         }
 
+        $bank = $this->getFirstBank();
+
         if (!$request->use_self) {
             $this->validateSender($request);
             $this->validateReceiver($request);
@@ -62,9 +64,10 @@ class ItemController extends Controller
                 'weight' => $request->weight,
                 'status' => 'request',
                 'note' => $request->note,
+                'bank_id' => $bank->id,
             ]);
 
-            return redirect()->route('customer.item')->with('success', 'Paket anda sudah kami terima, silahkan tunggu konfirmasi dari kami');
+            return redirect()->route('customer.item')->with('success', 'Paket anda sudah kami terima, silahkan tunggu konfirmasi dari agen');
         } else {
             $request->merge([
                 'sender_name' => null,
@@ -102,6 +105,7 @@ class ItemController extends Controller
                     'weight' => $request->weight,
                     'status' => 'request',
                     'note' => $request->note,
+                    'bank_id' => $bank->id,
                 ]);
             }
         }
@@ -187,5 +191,11 @@ class ItemController extends Controller
         ], [
             'weight.required' => 'Berat barang tidak boleh kosong',
         ]);
+    }
+
+    private function getFirstBank()
+    {
+        $bank = Bank::first();
+        return $bank;
     }
 }
