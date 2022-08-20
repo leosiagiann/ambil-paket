@@ -61,6 +61,8 @@ Route::name('finance.')->prefix('finance')->group(function () {
     Route::group(['middleware' => 'auth'], function () {
         Route::group(['middleware' => 'finance'], function () {
             Route::get('', [FinanceController::class, 'index'])->name('index');
+
+            Route::get('agen', [FinanceController::class, 'agen'])->name('agen');
         });
     });
 });
