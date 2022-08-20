@@ -131,6 +131,45 @@
                                 </button>
                                 @endif
                             </td>
+                            <!-- modal transaction{{ $item->id }} -->
+                            <div class="modal fade" id="transaction{{ $item->id }}" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Konfirmasi Pembayaran</h5>
+                                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">×</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <!-- show bank info from $item->bank as text -->
+                                            <p>
+                                                <strong>Pembayaran dapat dilakukan melalui :</strong>
+                                            </p>
+                                            <p>
+                                                <strong>
+                                                    {{ $item->bank->name }} : {{ $item->bank->number }} a.n
+                                                    {{ $item->bank->bank_name }}
+                                                </strong>
+                                            </p>
+                                            <form action="s" method="POST">
+                                                @csrf
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">Konfirmasi</label>
+                                                    <input type="text" class="form-control" name="confirm"
+                                                        value="{{ $item->confirm }}" readonly>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="btn btn-secondary" type="button"
+                                                data-dismiss="modal">Batal</button>
+                                            <button class="btn btn-primary" type="submit">Unggah</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <!-- modal confirmYes{{ $item->id }} -->
                             <div class="modal fade" id="confirmYes{{ $item->id }}" tabindex="-1" role="dialog"
                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
