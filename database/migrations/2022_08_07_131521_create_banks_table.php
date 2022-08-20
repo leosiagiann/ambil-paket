@@ -21,6 +21,7 @@ class CreateBanksTable extends Migration
                 ->onUpdate('cascade');
             $table->string('name');
             $table->string('number');
+            $table->string('bank_name');
             $table->timestamps();
         });
     }
