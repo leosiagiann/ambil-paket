@@ -48,16 +48,45 @@
                                 @endif
                                 <span class="badge badge-success">{{ $bank->name }}:
                                     {{ $bank->number }} a.n {{ $bank->bank_name }}
-                                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
-                                        data-target="#removeBanks">
-                                        <i class="fa fa-trash"></i>
-                                    </button> |
                                     <a href="{{ route('finance.agen.createBank', $agen->id) }}">
                                         <button type="button" class="btn btn-primary btn-sm">
                                             <i class="fa fa-edit"></i>
                                         </button>
-                                    </a>
+                                    </a> |
+                                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
+                                        data-target="#removeBank{{ $bank->id }}">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
                                 </span>
+                                <!-- modal removeBank{{ $bank->id }} -->
+                                <div class="modal fade" id="removeBank{{ $bank->id }}" tabindex="-1" role="dialog"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Hapus Bank</h5>
+                                                <button class="close" type="button" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">×</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>Apakah anda yakin ingin menghapus bank ini?</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button class="btn btn-secondary" type="button"
+                                                    data-dismiss="modal">Batal</button>
+                                                <form action="{{ route('finance.agen.destroyBank', $bank->id) }}"
+                                                    method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button class="btn btn-danger" type="submit">Hapus</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- end modal removeBank{{ $bank->id }} -->
                                 @endforeach
                                 @else
                                 <span class="badge badge-danger">Belum ada</span>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Bank;
 use App\Models\TypeBank;
 
 class FinanceController extends Controller
@@ -41,6 +42,12 @@ class FinanceController extends Controller
 
         $agen->banks()->create($request->all());
         return redirect()->route('finance.agen')->with('success', 'Akun Bank berhasil ditambahkan');
+    }
+
+    public function destroyBank(Bank $bank)
+    {
+        $bank->delete();
+        return redirect()->route('finance.agen')->with('success', 'Akun Bank berhasil dihapus');
     }
 
     private function validateBank(Request $request)
