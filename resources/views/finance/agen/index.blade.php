@@ -60,29 +60,43 @@
                                     <i class="fas fa-plus"></i> Tambah Akun Bank
                                 </button>
                                 @endif
-                                <div class="modal fade" id="deleteAgen{{$agen->id}}" tabindex="-1" role="dialog"
-                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <!-- modal addBank{{ $agen->id }} -->
+                                <div class="modal fade" id="addBank{{ $agen->id }}" tabindex="-1" role="dialog"
+                                    aria-labelledby="addBank{{ $agen->id }}Label" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Delete Agen</h5>
-                                                <button class="close" type="button" data-dismiss="modal"
+                                                <h5 class="modal-title" id="addBank{{ $agen->id }}Label">Tambah
+                                                    Akun Bank</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
                                                     aria-label="Close">
-                                                    <span aria-hidden="true">×</span>
+                                                    <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                <p>Are you sure you want to delete this agen?</p>
+                                                <form action="#" method="post">
+                                                    @csrf
+                                                    <div class="form-group">
+                                                        <label for="bank_name">Nama Bank</label>
+                                                        <input type="text" class="form-control" id="bank_name"
+                                                            name="bank_name" placeholder="Nama Bank">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="bank_number">Nomor Rekening</label>
+                                                        <input type="text" class="form-control" id="bank_number"
+                                                            name="bank_number" placeholder="Nomor Rekening">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="bank_name">Nama Pemilik Rekening</label>
+                                                        <input type="text" class="form-control" id="bank_name"
+                                                            name="bank_name" placeholder="Nama Pemilik Rekening">
+                                                    </div>
+                                                </form>
                                             </div>
                                             <div class="modal-footer">
-                                                <button class="btn btn-secondary" type="button"
-                                                    data-dismiss="modal">Cancel</button>
-                                                <form action="{{ route('admin.agen.destroy', $agen->id) }}"
-                                                    method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button class="btn btn-danger" type="submit">Delete</button>
-                                                </form>
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-dismiss="modal">Tutup</button>
+                                                <button type="submit" class="btn btn-primary">Tambah</button>
                                             </div>
                                         </div>
                                     </div>
