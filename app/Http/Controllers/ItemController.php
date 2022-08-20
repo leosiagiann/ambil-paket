@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Bank;
 use App\Models\Sender;
 use App\Models\Receiver;
 use App\Models\Item;
@@ -28,6 +29,10 @@ class ItemController extends Controller
 
     public function storeItem(Request $request)
     {
+        if ($this->bankIsNotAvailable()) {
+            return redirect()->route('customer.item')->with('error', 'Agen tidak tersedia!');
+        }
+
         if (!$request->use_self) {
             $this->validateSender($request);
             $this->validateReceiver($request);
@@ -99,6 +104,16 @@ class ItemController extends Controller
                     'note' => $request->note,
                 ]);
             }
+        }
+    }
+
+    private function bankIsNotAvailable()
+    {
+        $count = Bank::count();
+        if ($count == 0) {
+            return true;
+        } else {
+            return false;
         }
     }
 
