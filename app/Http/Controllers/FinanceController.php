@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\TypeBank;
 
 class FinanceController extends Controller
 {
@@ -30,19 +31,44 @@ class FinanceController extends Controller
             'title' => 'Tambah Akun Bank',
             'agen' => $agen,
             'page' => 'Users',
+            'types' => $this->getAllTypeBank(),
         ]);
     }
 
     public function storeBank(Request $request, User $agen)
     {
-        $agen->bank()->create($request->all());
-        return redirect()->route('finance.agen.index');
+        $this->validateBank($request);
+
+        $agen->banks()->create($request->all());
+        return redirect()->route('finance.agen')->with('success', 'Akun Bank berhasil ditambahkan');
+    }
+
+    private function validateBank(Request $request)
+    {
+        return $request->validate(
+            [
+                'name' => 'required',
+                'number' => 'required',
+                'bank_name' => 'required',
+            ],
+            [
+                'name.required' => 'Silahkan pilih nama bank',
+                'number.required' => 'Silahkan masukkan nomor rekening',
+                'bank_name.required' => 'Silahkan masukkan nama pemilik rekening',
+            ]
+        );
     }
 
     private function getAllAgen()
     {
-        return User::where('role_id', '4')
-            ->orderBy('created_at', 'desc')
+        return User::with('banks')
+            ->where('role_id', '4')
+            ->latest()
             ->get();
+    }
+
+    private function getAllTypeBank()
+    {
+        return TypeBank::all();
     }
 }

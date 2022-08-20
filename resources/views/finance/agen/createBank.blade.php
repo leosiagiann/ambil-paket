@@ -11,28 +11,41 @@
     <div class="card-body">
         <div class="row">
             <div class="col-lg-12">
-                <form action="{{ route('super_admin.admin.store') }}" method="POST">
+                <form action="{{ route('finance.agen.storeBank', $agen->id) }}" method="POST">
                     @csrf
                     <div class="form-group">
                         <label for="name">Nama Bank</label>
-                        <select name="name" id="name" class="form-control">
-                            <option value="">Pilih Nama Bank</option>
-                            <option value="BRI">BRI</option>
-                            <option value="BNI">BNI</option>
-                            <option value="BCA">BCA</option>
-                            <option value="Mandiri">Mandiri</option>
-                            <option value="Dana">Dana</option>
-                            <option value="OVO">OVO</option>
-                            <option value="CIMB">CIMB</option>
+                        <select name="name" id="name" class="form-control @error('name') is-invalid @enderror">
+                            <option value="">Pilih Bank</option>
+                            @foreach ($types as $type)
+                            <option value="{{ $type->name }}">{{ $type->name }}</option>
+                            @endforeach
                         </select>
+                        @error('name')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                        @enderror
                     </div>
                     <div class="form-group">
-                        <label for="bank_number">Nomor Rekening</label>
-                        <input type="text" name="bank_number" id="bank_number" class="form-control">
+                        <label for="number">Nomor Rekening</label>
+                        <input type="text" name="number" id="number"
+                            class="form-control @error('number') is-invalid @enderror">
+                        @error('number')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label for="bank_name">Nama Pemilik Rekening</label>
-                        <input type="text" name="bank_name" id="bank_name" class="form-control">
+                        <input type="text" name="bank_name" id="bank_name"
+                            class="form-control @error('bank_name') is-invalid @enderror">
+                        @error('bank_name')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                        @enderror
                     </div>
                     <button type="submit" class="btn btn-primary">Tambah</button>
                 </form>

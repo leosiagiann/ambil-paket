@@ -11,6 +11,8 @@
             @if (session('success'))
             <div class="alert alert-success">
                 {{ session('success') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
             </div>
             @endif
             <div class="table-responsive">
@@ -39,23 +41,29 @@
                                 @endif
                             </td>
                             <td>
-                                @if ($agen->bank)
-                                <span class="badge badge-success">{{ $agen->bank->name }}:
-                                    {{ $agen->bank->number }}</span>
+                                @if (count($agen->banks) > 0)
+                                @foreach ($agen->banks as $bank)
+                                @if (!$loop->first)
+                                <br><br>
+                                @endif
+                                <span class="badge badge-success">{{ $bank->name }}:
+                                    {{ $bank->number }} a.n {{ $bank->bank_name }}
+                                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
+                                        data-target="#removeBanks">
+                                        <i class="fa fa-trash"></i>
+                                    </button> |
+                                    <a href="{{ route('finance.agen.createBank', $agen->id) }}">
+                                        <button type="button" class="btn btn-primary btn-sm">
+                                            <i class="fa fa-edit"></i>
+                                        </button>
+                                    </a>
+                                </span>
+                                @endforeach
                                 @else
                                 <span class="badge badge-danger">Belum ada</span>
                                 @endif
                             </td>
                             <td>
-                                @if ($agen->bank)
-                                <a href="{{ route('super_admin.admin.create') }}"
-                                    class="btn btn-primary btn-icon-split">
-                                    <span class="icon text-white-50">
-                                        <i class="fas fa-edit"></i>
-                                    </span>
-                                    <span class="text">Perbaharui Bank</span>
-                                </a>
-                                @else
                                 <a href="{{ route('finance.agen.createBank', $agen->id) }}"
                                     class="btn btn-primary btn-icon-split">
                                     <span class="icon text-white-50">
@@ -63,7 +71,6 @@
                                     </span>
                                     <span class="text">Tambah Bank</span>
                                 </a>
-                                @endif
                             </td>
                         </tr>
                         @endforeach
