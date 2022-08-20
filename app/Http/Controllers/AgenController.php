@@ -34,16 +34,23 @@ class AgenController extends Controller
         return redirect()->route('agen.confirm')->with('success', 'Paket berhasil ditolak');
     }
 
-    public function acceptConfirm(Item $item)
+    public function acceptConfirm(Request $request, Item $item)
     {
         $item->status = 'accepted';
+        $item->bank_id = $this->getFirstBankUser()->id;
+        $item->price = $request->price;
+        $item->time_delivery = $request->time_delivery;
         $item->save();
         return redirect()->route('agen.confirm')->with('success', 'Paket berhasil diterima, Menunggu Konfirmasi dari Customer');
     }
 
+    private function getFirstBankUser()
+    {
+        return auth()->user()->banks->first();
+    }
+
     private function getAllItemRequest()
     {
-        // get all item with status request and accepted
         return Item::where('status', 'request')
             ->orWhere('status', 'accepted')
             ->orderBy('created_at', 'desc')

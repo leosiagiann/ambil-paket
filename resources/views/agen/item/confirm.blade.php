@@ -35,6 +35,7 @@
                             <th>Estimasi Waktu</th>
                             <th>Status</th>
                             <th>Catatan</th>
+                            <th>Bukti Pembayaran</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -55,24 +56,24 @@
                                 </button>
                             </td>
                             <td>
-                                @if (!$item->harga)
+                                @if (!$item->price)
                                 <span class="badge badge-warning">Belum Ditentukan</span>
                                 @else
-                                Rp. {{ number_format($item->harga, 0, ',', '.') }}
+                                Rp. {{ number_format($item->price, 0, ',', '.') }}
                                 @endif
                             </td>
                             <td>
-                                @if (!$item->estimasi_waktu)
+                                @if (!$item->time_delivery)
                                 <span class="badge badge-warning">Belum Ditentukan</span>
                                 @else
-                                {{ $item->estimasi_waktu }} hari
+                                {{ $item->time_delivery }} hari
                                 @endif
                             </td>
                             <td>
                                 @if ($item->status == 'request')
-                                <span class="badge badge-warning">Belum Ditentukan</span>
-                                @elseif ($item->status == 'accept')
-                                <span class="badge badge-success">{{ $item->status }}</span>
+                                <span class="badge badge-warning">Silahkan Konfirmasi</span>
+                                @elseif ($item->status == 'accepted')
+                                <span class="badge badge-success">Konfirmasi Customer</span>
                                 @elseif ($item->status == 'reject')
                                 <span class="badge badge-danger">{{ $item->status }}</span>
                                 @elseif ($item->status == 'done')
@@ -90,6 +91,16 @@
                                 @endif
                             </td>
                             <td>
+                                @if ($item->proof)
+                                <button type="button" class="btn btn-primary btn-icon-split" data-toggle="modal"
+                                    data-target="#proof{{ $item->id }}">
+                                    <span class="text">Lihat</span>
+                                </button>
+                                @else
+                                -
+                                @endif
+                            </td>
+                            <td>
                                 @if ($item->status == 'request')
                                 <button type="button" class="btn btn-success btn-icon-split" data-toggle="modal"
                                     data-target="#confirmY{{ $item->id }}">
@@ -99,11 +110,8 @@
                                     data-target="#confirmX{{ $item->id }}">
                                     <span class="text">Tolak</span>
                                 </button>
-                                @elseif ($item->status == 'accept')
-                                <button type="button" class="btn btn-primary btn-icon-split" data-toggle="modal"
-                                    data-target="#done{{ $item->id }}">
-                                    <span class="text">Selesai</span>
-                                </button>
+                                @elseif ($item->status == 'accepted')
+                                <span class="badge badge-success">Konfirmasi Customer</span>
                                 @elseif ($item->status == 'reject')
                                 <button type="button" class="btn btn-danger btn-icon-split" data-toggle="modal"
                                     data-target="#reject{{ $item->id }}">
@@ -162,12 +170,12 @@
                                                 <div class="form-group">
                                                     <label for="">Harga</label>
                                                     <input type="number" class="form-control" name="price"
-                                                        placeholder="Harga">
+                                                        placeholder="Harga" required>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="">Estimasi Waktu</label>
                                                     <input type="number" class="form-control" name="time_delivery"
-                                                        placeholder="Estimasi Waktu">
+                                                        placeholder="Estimasi Waktu" required>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button class="btn btn-secondary" type="button"
