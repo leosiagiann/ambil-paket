@@ -6,6 +6,7 @@ use Illuminate\Database\Seeder;
 
 use App\Models\Role;
 use App\Models\User;
+use App\Models\TypeBank;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,21 +17,22 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Role::create([
-            'name' => 'super_admin',
-        ]);
-        Role::create([
-            'name' => 'admin',
-        ]);
-        Role::create([
-            'name' => 'finance',
-        ]);
-        Role::create([
-            'name' => 'agen',
-        ]);
-        Role::create([
-            'name' => 'customer',
-        ]);
+        TypeBank::create(
+            ['name' => 'BRI',],
+            ['name' => 'BNI',],
+            ['name' => 'BCA',],
+            ['name' => 'Mandiri',],
+            ['name' => 'Dana',],
+            ['name' => 'Ovo',],
+            ['name' => 'LinkAja',],
+        );
+        Role::create(
+            ['name' => 'super_admin',],
+            ['name' => 'admin',],
+            ['name' => 'finance',],
+            ['name' => 'agen',],
+            ['name' => 'customer',],
+        );
         User::factory(10)->create();
     }
 }
