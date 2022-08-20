@@ -22,7 +22,6 @@
                             <th>No</th>
                             <th>Name</th>
                             <th>Email</th>
-                            <th>Status</th>
                             <th>Bank Account</th>
                             <th>Action</th>
                         </tr>
@@ -33,13 +32,6 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $agen->name }}</td>
                             <td>{{ $agen->email }}</td>
-                            <td>
-                                @if ($agen->status == 'active')
-                                <span class="badge badge-success">Active</span>
-                                @else
-                                <span class="badge badge-danger">Inactive</span>
-                                @endif
-                            </td>
                             <td>
                                 @if (count($agen->banks) > 0)
                                 @foreach ($agen->banks as $bank)
