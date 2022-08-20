@@ -32,18 +32,27 @@
                     <thead>
                         <tr>
                             <th>No</th>
+                            <th>Resi</th>
                             <th>Pengirim</th>
                             <th>Penerima</th>
                             <th>Harga</th>
                             <th>Estimasi Waktu</th>
                             <th>Status</th>
                             <th>Catatan</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($items as $item)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
+                            <td>
+                                @if ($item->resi)
+                                {{ $item->resi }}
+                                @else
+                                <span class="badge badge-warning">Resi belum ada</span>
+                                @endif
+                            </td>
                             <td>
                                 <button type="button" class="btn btn-primary btn-icon-split" data-toggle="modal"
                                     data-target="#sender{{ $item->id }}">
@@ -57,26 +66,26 @@
                                 </button>
                             </td>
                             <td>
-                                @if (!$item->harga)
+                                @if (!$item->price)
                                 <span class="badge badge-warning">Belum Disetujui</span>
                                 @else
-                                Rp. {{ number_format($item->harga, 0, ',', '.') }}
+                                Rp. {{ number_format($item->price, 0, ',', '.') }}
                                 @endif
                             </td>
                             <td>
-                                @if (!$item->estimasi_waktu)
+                                @if (!$item->time_delivery)
                                 <span class="badge badge-warning">Belum Disetujui</span>
                                 @else
-                                {{ $item->estimasi_waktu }} hari
+                                {{ $item->time_delivery }} hari
                                 @endif
                             </td>
                             <td>
                                 @if ($item->status == 'request')
                                 <span class="badge badge-warning">Belum Disetujui</span>
-                                @elseif ($item->status == 'accept')
-                                <span class="badge badge-success">{{ $item->status }}</span>
-                                @elseif ($item->status == 'reject')
-                                <span class="badge badge-danger">{{ $item->status }}</span>
+                                @elseif ($item->status == 'accepted')
+                                <span class="badge badge-warning">Lakukan Konfrimasi</span>
+                                @elseif ($item->status == 'ok')
+                                <span class="badge badge-warning">Lakukan Pembayaran</span>
                                 @elseif ($item->status == 'done')
                                 <span class="badge badge-primary">{{ $item->status }}</span>
                                 @endif
@@ -91,6 +100,53 @@
                                 -
                                 @endif
                             </td>
+                            <td>
+                                @if ($item->status == 'request')
+                                <span class="badge badge-warning">Belum Disetujui</span>
+                                @elseif ($item->status == 'accepted')
+                                <button type="button" class="btn btn-success btn-sm" data-toggle="modal"
+                                    data-target="#confirmYes{{ $item->id }}">
+                                    <i class="fa fa-check"></i> Lanjutkan
+                                </button>
+                                |
+                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
+                                    data-target="#confirmNo{{ $item->id }}">
+                                    <i class="fa fa-times"></i> Batal
+                                </button>
+                                @elseif ($item->status == 'ok')
+                                <button type="button" class="btn btn-success btn-sm" data-toggle="modal"
+                                    data-target="#transaction{{ $item->id }}">
+                                    <i class="fa fa-money-bill"></i> Bayar
+                                </button>
+                                @endif
+                            </td>
+                            <!-- modal confirmYes{{ $item->id }} -->
+                            <div class="modal fade" id="confirmYes{{ $item->id }}" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Konfirmasi</h5>
+                                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">×</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Apakah anda yakin ingin melanjutkan proses pengiriman?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="btn btn-secondary" type="button"
+                                                data-dismiss="modal">Batal</button>
+                                            <form action="{{ route('customer.item.confirmYes', $item->id) }}"
+                                                method="POST">
+                                                @csrf
+                                                <button type="submit" class="btn btn-primary">Ya</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end modal confirmYes{{ $item->id }} -->
                             <!-- modal sender{{ $item->id }} -->
                             <div class="modal fade" id="sender{{ $item->id }}" tabindex="-1" role="dialog"
                                 aria-labelledby="exampleModalLabel" aria-hidden="true">

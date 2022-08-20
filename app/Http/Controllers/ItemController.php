@@ -15,7 +15,7 @@ class ItemController extends Controller
         return view('customer.item.index', [
             'title' => 'Kirim Paket',
             'page' => 'Paket',
-            'items' => Item::all(),
+            'items' => $this->getAllItems(),
         ]);
     }
 
@@ -111,6 +111,14 @@ class ItemController extends Controller
         }
     }
 
+    public function confirmYes(Item $item)
+    {
+        $item->update([
+            'status' => 'ok',
+        ]);
+        return redirect()->route('customer.item')->with('success', 'Berhasil mengkonfirmasi paket, harap lakukan pembayaran!');
+    }
+
     private function bankIsNotAvailable()
     {
         $count = Bank::count();
@@ -197,5 +205,11 @@ class ItemController extends Controller
     {
         $bank = Bank::first();
         return $bank;
+    }
+
+    private function getAllItems()
+    {
+        return Item::latest()
+            ->get();
     }
 }

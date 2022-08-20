@@ -40,6 +40,7 @@ Route::name('customer.')->prefix('customer')->group(function () {
             Route::get('kirim-paket', [ItemController::class, 'index'])->name('item');
             Route::get('kirim-paket/create', [ItemController::class, 'createItem'])->name('item.create');
             Route::post('kirim-paket/create', [ItemController::class, 'storeItem'])->name('item.store');
+            Route::post('kirim-paket/{item}', [ItemController::class, 'confirmYes'])->name('item.confirmYes');
             Route::get('lacak-paket', [ItemController::class, 'lacakPaket'])->name('lacak-paket');
             Route::get('riwayat-pengiriman', [ItemController::class, 'riwayatPengiriman'])->name('riwayat-pengiriman');
         });
