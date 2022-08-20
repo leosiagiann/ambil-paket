@@ -17,7 +17,7 @@
     <div class="sidebar-heading">
         Menu
     </div>
-    <li class="nav-item {{ $title == 'Agen' ? 'active' : ''}}">
+    <li class="nav-item {{ $page == 'Users' ? 'active' : ''}}">
         <a class="nav-link" href="{{ route('finance.agen') }}">
             <i class="fas fa-users"></i>
             <span>Agen</span>

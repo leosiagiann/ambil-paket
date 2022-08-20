@@ -24,6 +24,21 @@ class FinanceController extends Controller
         ]);
     }
 
+    public function createBank(User $agen)
+    {
+        return view('finance.agen.createBank', [
+            'title' => 'Tambah Akun Bank',
+            'agen' => $agen,
+            'page' => 'Users',
+        ]);
+    }
+
+    public function storeBank(Request $request, User $agen)
+    {
+        $agen->bank()->create($request->all());
+        return redirect()->route('finance.agen.index');
+    }
+
     private function getAllAgen()
     {
         return User::where('role_id', '4')

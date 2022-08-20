@@ -48,59 +48,22 @@
                             </td>
                             <td>
                                 @if ($agen->bank)
-                                <!-- make button modal to update bank information user -->
-                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
-                                    data-target="#updateBank{{ $agen->id }}">
-                                    <i class="fas fa-edit"></i> Ubah Akun Bank
-                                </button>
+                                <a href="{{ route('super_admin.admin.create') }}"
+                                    class="btn btn-primary btn-icon-split">
+                                    <span class="icon text-white-50">
+                                        <i class="fas fa-edit"></i>
+                                    </span>
+                                    <span class="text">Perbaharui Bank</span>
+                                </a>
                                 @else
-                                <!-- make button modal to add bank information user -->
-                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
-                                    data-target="#addBank{{ $agen->id }}">
-                                    <i class="fas fa-plus"></i> Tambah Akun Bank
-                                </button>
+                                <a href="{{ route('finance.agen.createBank', $agen->id) }}"
+                                    class="btn btn-primary btn-icon-split">
+                                    <span class="icon text-white-50">
+                                        <i class="fas fa-plus"></i>
+                                    </span>
+                                    <span class="text">Tambah Bank</span>
+                                </a>
                                 @endif
-                                <!-- modal addBank{{ $agen->id }} -->
-                                <div class="modal fade" id="addBank{{ $agen->id }}" tabindex="-1" role="dialog"
-                                    aria-labelledby="addBank{{ $agen->id }}Label" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="addBank{{ $agen->id }}Label">Tambah
-                                                    Akun Bank</h5>
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                    aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form action="#" method="post">
-                                                    @csrf
-                                                    <div class="form-group">
-                                                        <label for="bank_name">Nama Bank</label>
-                                                        <input type="text" class="form-control" id="bank_name"
-                                                            name="bank_name" placeholder="Nama Bank">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="bank_number">Nomor Rekening</label>
-                                                        <input type="text" class="form-control" id="bank_number"
-                                                            name="bank_number" placeholder="Nomor Rekening">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="bank_name">Nama Pemilik Rekening</label>
-                                                        <input type="text" class="form-control" id="bank_name"
-                                                            name="bank_name" placeholder="Nama Pemilik Rekening">
-                                                    </div>
-                                                </form>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-dismiss="modal">Tutup</button>
-                                                <button type="submit" class="btn btn-primary">Tambah</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </td>
                         </tr>
                         @endforeach
