@@ -50,7 +50,7 @@
                                 @if ($item->resi)
                                 {{ $item->resi }}
                                 @else
-                                <span class="badge badge-warning">Resi belum ada</span>
+                                -
                                 @endif
                             </td>
                             <td>
@@ -111,7 +111,7 @@
                                 |
                                 <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
                                     data-target="#confirmNo{{ $item->id }}">
-                                    <i class="fa fa-times"></i> Batal
+                                    <i class="fa fa-times"></i> Batalkan
                                 </button>
                                 @elseif ($item->status == 'ok')
                                 <button type="button" class="btn btn-success btn-sm" data-toggle="modal"
@@ -147,6 +147,33 @@
                                 </div>
                             </div>
                             <!-- end modal confirmYes{{ $item->id }} -->
+                            <!-- modal confirmNo{{ $item->id }} -->
+                            <div class="modal fade" id="confirmNo{{ $item->id }}" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Konfirmasi</h5>
+                                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">×</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Apakah anda yakin ingin membatalkan proses pengiriman?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="btn btn-secondary" type="button"
+                                                data-dismiss="modal">Batal</button>
+                                            <form action="{{ route('customer.item.confirmNo', $item->id) }}"
+                                                method="POST">
+                                                @csrf
+                                                <button type="submit" class="btn btn-primary">Ya</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end modal confirmNo{{ $item->id }} -->
                             <!-- modal sender{{ $item->id }} -->
                             <div class="modal fade" id="sender{{ $item->id }}" tabindex="-1" role="dialog"
                                 aria-labelledby="exampleModalLabel" aria-hidden="true">

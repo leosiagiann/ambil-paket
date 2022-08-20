@@ -119,6 +119,14 @@ class ItemController extends Controller
         return redirect()->route('customer.item')->with('success', 'Berhasil mengkonfirmasi paket, harap lakukan pembayaran!');
     }
 
+    public function confirmNo(Item $item)
+    {
+        $item->update([
+            'status' => 'cancel',
+        ]);
+        return redirect()->route('customer.item')->with('success', 'Berhasil mengkonfirmasi paket, paket anda dibatalkan!');
+    }
+
     private function bankIsNotAvailable()
     {
         $count = Bank::count();
@@ -209,7 +217,8 @@ class ItemController extends Controller
 
     private function getAllItems()
     {
-        return Item::latest()
+        return Item::whereNotIn('status', ['cancel'])
+            ->latest()
             ->get();
     }
 }
