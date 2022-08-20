@@ -65,6 +65,8 @@ Route::name('finance.')->prefix('finance')->group(function () {
             Route::get('agen', [FinanceController::class, 'agen'])->name('agen');
             Route::get('agen/{agen}', [FinanceController::class, 'createBank'])->name('agen.createBank');
             Route::post('agen/{agen}', [FinanceController::class, 'storeBank'])->name('agen.storeBank');
+            Route::get('agen/edit-bank/{bank}', [FinanceController::class, 'editBank'])->name('agen.editBank');
+            Route::put('agen/edit-bank/{bank}', [FinanceController::class, 'updateBank'])->name('agen.updateBank');
             Route::delete('agen/{bank}', [FinanceController::class, 'destroyBank'])->name('agen.destroyBank');
         });
     });

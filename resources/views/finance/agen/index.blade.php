@@ -48,7 +48,7 @@
                                 @endif
                                 <span class="badge badge-success">{{ $bank->name }}:
                                     {{ $bank->number }} a.n {{ $bank->bank_name }}
-                                    <a href="{{ route('finance.agen.createBank', $agen->id) }}">
+                                    <a href="{{ route('finance.agen.editBank', $bank->id) }}">
                                         <button type="button" class="btn btn-primary btn-sm">
                                             <i class="fa fa-edit"></i>
                                         </button>

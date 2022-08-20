@@ -44,6 +44,16 @@ class FinanceController extends Controller
         return redirect()->route('finance.agen')->with('success', 'Akun Bank berhasil ditambahkan');
     }
 
+    public function editBank(Bank $bank)
+    {
+        return view('finance.agen.editBank', [
+            'title' => 'Edit Akun Bank',
+            'bank' => $bank,
+            'page' => 'Users',
+            'types' => $this->getAllTypeBank(),
+        ]);
+    }
+
     public function destroyBank(Bank $bank)
     {
         $bank->delete();
