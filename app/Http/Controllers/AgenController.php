@@ -27,7 +27,9 @@ class AgenController extends Controller
     public function rejectConfirm(Request $request, Item $item)
     {
         $item->status = 'rejected';
-        $item->note = $request->note;
+        if ($request->note) {
+            $item->note = $request->note;
+        }
         $item->save();
         return redirect()->route('agen.confirm')->with('success', 'Paket berhasil ditolak');
     }
