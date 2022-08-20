@@ -54,6 +54,14 @@ class FinanceController extends Controller
         ]);
     }
 
+    public function updateBank(Request $request, Bank $bank)
+    {
+        $this->validateBank($request);
+
+        $bank->update($request->all());
+        return redirect()->route('finance.agen')->with('success', 'Akun Bank berhasil diperbarui');
+    }
+
     public function destroyBank(Bank $bank)
     {
         $bank->delete();
