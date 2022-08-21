@@ -56,6 +56,13 @@ class AgenController extends Controller
         return redirect()->route('agen.confirm')->with('success', 'Paket berhasil diproses');
     }
 
+    public function notProcessPaket(Item $item)
+    {
+        $item->status = 'not_process';
+        $item->save();
+        return redirect()->route('agen.confirm')->with('success', 'Paket berhasil ditolak');
+    }
+
     private function getFirstBankUser()
     {
         return auth()->user()->banks->first();
