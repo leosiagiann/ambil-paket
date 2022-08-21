@@ -147,7 +147,7 @@ class ItemController extends Controller
 
         if ($request->payment == 'cod') {
             $item->update([
-                'proof' => $request->proof,
+                'proof' => $request->payment,
                 'status' => 'paid',
             ]);
             return redirect()->route('customer.item')->with('success', 'Berhasil memilih metode pembayaran, paket anda akan segera diproses');
