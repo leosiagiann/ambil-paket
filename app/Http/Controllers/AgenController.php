@@ -56,7 +56,9 @@ class AgenController extends Controller
     {
         return Item::where('status', 'request')
             ->orWhere('status', 'accepted')
-            ->orderBy('created_at', 'desc')
+            ->orWhere('status', 'ok')
+            ->orWhere('status', 'paid')
+            ->latest()
             ->get();
     }
 }

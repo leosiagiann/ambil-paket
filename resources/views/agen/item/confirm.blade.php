@@ -73,11 +73,13 @@
                                 @if ($item->status == 'request')
                                 <span class="badge badge-warning">Silahkan Konfirmasi</span>
                                 @elseif ($item->status == 'accepted')
-                                <span class="badge badge-success">Konfirmasi Customer</span>
-                                @elseif ($item->status == 'reject')
-                                <span class="badge badge-danger">{{ $item->status }}</span>
+                                <span class="badge badge-warning">Konfirmasi Customer</span>
+                                @elseif ($item->status == 'ok')
+                                <span class="badge badge-warning">Menunggu Pembayaran</span>
                                 @elseif ($item->status == 'done')
                                 <span class="badge badge-primary">{{ $item->status }}</span>
+                                @elseif ($item->status == 'paid')
+                                <span class="badge badge-danger">Konfrimasi Pembayaran</span>
                                 @endif
                             </td>
                             <td>
@@ -91,7 +93,9 @@
                                 @endif
                             </td>
                             <td>
-                                @if ($item->proof)
+                                @if ($item->proof == 'cod')
+                                COD
+                                @elseif ($item->proof)
                                 <button type="button" class="btn btn-primary btn-icon-split" data-toggle="modal"
                                     data-target="#proof{{ $item->id }}">
                                     <span class="text">Lihat</span>
