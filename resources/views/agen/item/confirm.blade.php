@@ -154,7 +154,7 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-dismiss="modal">Tidak</button>
-                                            <form action="" method="POST">
+                                            <form action="{{ route('agen.confirm.process', $item->id) }}" method="GET">
                                                 @csrf
                                                 <button type="submit" class="btn btn-success">Ya</button>
                                             </form>
