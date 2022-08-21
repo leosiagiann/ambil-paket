@@ -106,7 +106,7 @@
                                 COD
                                 @elseif ($item->proof)
                                 <button type="button" class="btn btn-primary btn-icon-split" data-toggle="modal"
-                                    data-target="#bukti{{ $item->id }}">
+                                    data-target="#proof{{ $item->id }}">
                                     <span class="text">Lihat</span>
                                 </button>
                                 @else
@@ -139,6 +139,34 @@
                                 <span class="badge badge-warning">Menunggu Validasi Agen</span>
                                 @endif
                             </td>
+                            <!-- modal proof{{ $item->id }} -->
+                            <!-- make modal for download proof -->
+                            <div class="modal fade" id="proof{{ $item->id }}" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Bukti Pembayaran</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <img src="{{ asset('assets/img/payment/'.$item->proof) }}"
+                                                alt="{{ $item->proof }}" class="img-fluid">
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">Close</button>
+                                            <a href="{{ asset('assets/img/payment/'.$item->proof) }}"
+                                                class="btn btn-primary" download>
+                                                <i class="fa fa-download"></i> Download
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end modal proof{{ $item->id }} -->
                             <!-- modal typeBank{{ $item->id }} -->
                             <div class="modal fade" id="typeBank{{ $item->id }}" tabindex="-1" role="dialog"
                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
