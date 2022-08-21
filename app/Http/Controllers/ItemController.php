@@ -7,6 +7,7 @@ use App\Models\Bank;
 use App\Models\Sender;
 use App\Models\Receiver;
 use App\Models\Item;
+use App\Models\User;
 
 class ItemController extends Controller
 {
@@ -16,6 +17,7 @@ class ItemController extends Controller
             'title' => 'Kirim Paket',
             'page' => 'Paket',
             'items' => $this->getAllItems(),
+            'pathItemController' => \App\Http\Controllers\ItemController::class,
         ]);
     }
 
@@ -221,5 +223,13 @@ class ItemController extends Controller
             ->whereNotIn('status', ['canceled', 'rejected'])
             ->latest()
             ->get();
+    }
+
+    public function getAllBanksAgent($bank_id)
+    {
+        $user_id = Bank::find($bank_id)->user_id;
+        $user = User::find($user_id);
+        $banks = $user->banks;
+        return $banks;
     }
 }

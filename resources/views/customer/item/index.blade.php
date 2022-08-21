@@ -125,14 +125,49 @@
                                     <i class="fa fa-times"></i> Batalkan
                                 </button>
                                 @elseif ($item->status == 'ok')
-                                <button type="button" class="btn btn-success btn-sm" data-toggle="modal"
-                                    data-target="#transaction{{ $item->id }}">
-                                    <i class="fa fa-money-bill"></i> Bayar
+                                <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal"
+                                    data-target="#uploadProof{{ $item->id }}">
+                                    <i class="fa fa-money-bill"></i> Upload Bukti
+                                </button>
+                                <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal"
+                                    data-target="#typeBank{{ $item->id }}">
+                                    <i class="fa fa-eye"></i> Jenis Bank
                                 </button>
                                 @endif
                             </td>
+                            <!-- modal typeBank{{ $item->id }} -->
+                            <div class="modal fade" id="typeBank{{ $item->id }}" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                @php
+                                $banks = $pathItemController::getAllBanksAgent($item->bank_id);
+                                @endphp
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Jenis Bank</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <strong>Pembayaran dapat dilakukan melalui :</strong>
+                                            <p>
+                                                @foreach ($banks as $bank)
+                                                {{ $bank->name }} : {{ $bank->number }} a.n
+                                                {{ $bank->bank_name }}<br>
+                                                @endforeach
+                                            </p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end modal typeBank{{ $item->id }} -->
                             <!-- modal transaction{{ $item->id }} -->
-                            <div class="modal fade" id="transaction{{ $item->id }}" tabindex="-1" role="dialog"
+                            <div class="modal fade" id="uploadProof{{ $item->id }}" tabindex="-1" role="dialog"
                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
@@ -143,22 +178,21 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <!-- show bank info from $item->bank as text -->
-                                            <p>
-                                                <strong>Pembayaran dapat dilakukan melalui :</strong>
-                                            </p>
-                                            <p>
-                                                <strong>
-                                                    {{ $item->bank->name }} : {{ $item->bank->number }} a.n
-                                                    {{ $item->bank->bank_name }}
-                                                </strong>
-                                            </p>
                                             <form action="s" method="POST">
                                                 @csrf
                                                 <div class="form-group">
-                                                    <label for="exampleInputEmail1">Konfirmasi</label>
-                                                    <input type="text" class="form-control" name="confirm"
-                                                        value="{{ $item->confirm }}" readonly>
+                                                    <label for="">Metode Pembayaran</label>
+                                                    <select name="payment_method" id="payment_method"
+                                                        class="form-control">
+                                                        <option value="">Pilih Metode Pembayaran</option>
+                                                        <option value="transfer">Transfer</option>
+                                                        <option value="cod">COD</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="exampleInputEmail1">Unggah Bukti Pembayaran</label>
+                                                    <input type="file" class="form-control-file" id="exampleInputFile"
+                                                        aria-describedby="fileHelp">
                                                 </div>
                                             </form>
                                         </div>
