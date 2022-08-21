@@ -87,8 +87,8 @@
                                 <span class="badge badge-warning">Lakukan Konfrimasi</span>
                                 @elseif ($item->status == 'ok')
                                 <span class="badge badge-warning">Lakukan Pembayaran</span>
-                                @elseif ($item->status == 'done')
-                                <span class="badge badge-primary">{{ $item->status }}</span>
+                                @elseif ($item->status == 'paid')
+                                <span class="badge badge-warning">Menunggu Validasi Agen</span>
                                 @endif
                             </td>
                             <td>
@@ -133,6 +133,8 @@
                                     data-target="#typeBank{{ $item->id }}">
                                     <i class="fa fa-eye"></i> Jenis Bank
                                 </button>
+                                @elseif ($item->status == 'paid')
+                                <span class="badge badge-warning">Menunggu Validasi Agen</span>
                                 @endif
                             </td>
                             <!-- modal typeBank{{ $item->id }} -->
@@ -178,12 +180,12 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <form action="s" method="POST">
+                                            <form action="{{ route('customer.item.payment', $item->id) }}" method="POST"
+                                                enctype="multipart/form-data">
                                                 @csrf
                                                 <div class="form-group">
                                                     <label for="">Metode Pembayaran</label>
-                                                    <select name="payment_method" id="payment_method"
-                                                        class="form-control">
+                                                    <select name="payment" id="payment" class="form-control">
                                                         <option value="">Pilih Metode Pembayaran</option>
                                                         <option value="transfer">Transfer</option>
                                                         <option value="cod">COD</option>
@@ -192,14 +194,14 @@
                                                 <div class="form-group">
                                                     <label for="exampleInputEmail1">Unggah Bukti Pembayaran</label>
                                                     <input type="file" class="form-control-file" id="exampleInputFile"
-                                                        aria-describedby="fileHelp">
+                                                        name="file" aria-describedby="fileHelp">
                                                 </div>
-                                            </form>
                                         </div>
                                         <div class="modal-footer">
                                             <button class="btn btn-secondary" type="button"
                                                 data-dismiss="modal">Batal</button>
                                             <button class="btn btn-primary" type="submit">Unggah</button>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>

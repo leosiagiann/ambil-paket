@@ -139,6 +139,30 @@ class ItemController extends Controller
         }
     }
 
+    public function paymentItem(Request $request, Item $item)
+    {
+        if (!$this->checkPayment($request)) {
+            return redirect()->route('customer.item')->with('error', 'Gagal melakukan pembayaran, silahkan pilih kategori pembayaran!');
+        }
+
+        if ($request->payment == 'cod') {
+            $item->update([
+                'proof' => $request->proof,
+                'status' => 'paid',
+            ]);
+            return redirect()->route('customer.item')->with('success', 'Berhasil memilih metode pembayaran, paket anda akan segera diproses');
+        }
+    }
+
+    private function checkPayment(Request $request)
+    {
+        if ($request->payment) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function lacakPaket()
     {
         return view('customer.item.lacak-paket', [
