@@ -126,7 +126,7 @@
                                     <span class="text">Proses</span>
                                 </button>
                                 <button type="button" class="btn btn-danger btn-icon-split" data-toggle="modal"
-                                    data-target="#reject{{ $item->id }}">
+                                    data-target="#notProcess{{ $item->id }}">
                                     <span class="text">Tolak</span>
                                 </button>
                                 @elseif ($item->status == 'done')
@@ -163,6 +163,33 @@
                                 </div>
                             </div>
                             <!-- end modal process{{ $item->id }} -->
+                            <!-- modal notProcess{{ $item->id }} -->
+                            <div class="modal fade" id="notProcess{{ $item->id }}" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Konfirmasi Tolak</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Apakah anda yakin ingin menolak pengiriman?</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">Tidak</button>
+                                            <form action="{{ route('agen.confirm.notProcess', $item->id) }}"
+                                                method="GET">
+                                                @csrf
+                                                <button type="submit" class="btn btn-success">Ya</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end modal notProcess{{ $item->id }} -->
                             <!-- modal for download proof -->
                             <div class="modal fade" id="proof{{ $item->id }}" tabindex="-1" role="dialog"
                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
