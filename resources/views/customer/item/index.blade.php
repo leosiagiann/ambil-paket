@@ -102,7 +102,9 @@
                                 @endif
                             </td>
                             <td>
-                                @if ($item->proof)
+                                @if ($item->proof == 'cod')
+                                COD
+                                @elseif ($item->proof)
                                 <button type="button" class="btn btn-primary btn-icon-split" data-toggle="modal"
                                     data-target="#bukti{{ $item->id }}">
                                     <span class="text">Lihat</span>

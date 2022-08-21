@@ -244,6 +244,7 @@ class ItemController extends Controller
     private function getAllItems()
     {
         return Item::with('sender', 'receiver', 'bank')
+            ->where('user_id', auth()->user()->id)
             ->whereNotIn('status', ['canceled', 'rejected'])
             ->latest()
             ->get();
