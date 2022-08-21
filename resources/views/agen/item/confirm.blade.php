@@ -41,6 +41,10 @@
                     </thead>
                     <tbody>
                         @foreach ($items as $item)
+                        @php
+                        $user_id = $pathAgenController::getIdUserItem($item->bank_id);
+                        @endphp
+                        @if ($item->request == 'request' || $user_id == auth()->user()->id)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>
@@ -116,7 +120,11 @@
                                 </button>
                                 @elseif ($item->status == 'accepted')
                                 <span class="badge badge-success">Konfirmasi Customer</span>
-                                @elseif ($item->status == 'reject')
+                                @elseif ($item->status == 'paid')
+                                <button type="button" class="btn btn-success btn-icon-split" data-toggle="modal"
+                                    data-target="#process{{ $item->id }}">
+                                    <span class="text">Proses</span>
+                                </button>
                                 <button type="button" class="btn btn-danger btn-icon-split" data-toggle="modal"
                                     data-target="#reject{{ $item->id }}">
                                     <span class="text">Tolak</span>
@@ -128,6 +136,7 @@
                                 </button>
                                 @endif
                             </td>
+                            @endif
                             <!-- modal confirmX -->
                             <div class="modal fade" id="confirmX{{ $item->id }}" tabindex="-1" role="dialog"
                                 aria-labelledby="exampleModalLabel" aria-hidden="true">

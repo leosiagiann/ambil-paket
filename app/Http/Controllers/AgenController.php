@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Bank;
 use App\Models\Item;
 
 class AgenController extends Controller
@@ -21,6 +22,7 @@ class AgenController extends Controller
             'title' => 'Konfirmasi Paket',
             'page' => 'Paket',
             'items' => $this->getAllItemRequest(),
+            'pathAgenController' => \App\Http\Controllers\AgenController::class,
         ]);
     }
 
@@ -60,5 +62,11 @@ class AgenController extends Controller
             ->orWhere('status', 'paid')
             ->latest()
             ->get();
+    }
+
+    public function getIdUserItem($bank_id)
+    {
+        $user_id = Bank::find($bank_id)->user_id;
+        return $user_id;
     }
 }
