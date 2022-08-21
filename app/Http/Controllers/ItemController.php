@@ -11,6 +11,8 @@ use App\Models\User;
 
 class ItemController extends Controller
 {
+    const PATH = 'assets/img/payment/';
+
     public function index()
     {
         return view('customer.item.index', [
@@ -139,7 +141,7 @@ class ItemController extends Controller
         }
     }
 
-    public function paymentItem(Request $request, Item $item)
+    public function paymentItem(Item $item, Request $request)
     {
         if (!$this->checkPayment($request)) {
             return redirect()->route('customer.item')->with('error', 'Gagal melakukan pembayaran, silahkan pilih kategori pembayaran!');
@@ -152,6 +154,24 @@ class ItemController extends Controller
             ]);
             return redirect()->route('customer.item')->with('success', 'Berhasil memilih metode pembayaran, paket anda akan segera diproses');
         }
+
+        $image = $request->file('proof');
+        if ($image) {
+            $item->update([
+                'proof' => $this->saveImage($image),
+                'status' => 'paid',
+            ]);
+            return redirect()->route('customer.item')->with('success', 'Berhasil memilih metode pembayaran, paket anda akan segera diproses');
+        } else {
+            return redirect()->route('customer.item')->with('error', 'Gagal melakukan pembayaran, silahkan unggah bukti pembayaran!');
+        }
+    }
+
+    private function saveImage($image)
+    {
+        $image_name = time() . '.' . $image->getClientOriginalExtension();
+        $image->move(public_path(self::PATH), $image_name);
+        return $image_name;
     }
 
     private function checkPayment(Request $request)

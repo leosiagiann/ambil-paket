@@ -186,7 +186,7 @@
                                                 enctype="multipart/form-data">
                                                 @csrf
                                                 <div class="form-group">
-                                                    <label for="">Metode Pembayaran</label>
+                                                    <label for="payment">Metode Pembayaran</label>
                                                     <select name="payment" id="payment" class="form-control">
                                                         <option value="">Pilih Metode Pembayaran</option>
                                                         <option value="transfer">Transfer</option>
@@ -194,9 +194,9 @@
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="exampleInputEmail1">Unggah Bukti Pembayaran</label>
-                                                    <input type="file" class="form-control-file" id="exampleInputFile"
-                                                        name="file" aria-describedby="fileHelp">
+                                                    <label for="proof">Unggah Bukti Pembayaran</label>
+                                                    <input type="file" class="form-control-file" id="proof"
+                                                        name="proof">
                                                 </div>
                                         </div>
                                         <div class="modal-footer">
