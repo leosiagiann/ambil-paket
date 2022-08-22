@@ -193,6 +193,28 @@ class ItemController extends Controller
         ]);
     }
 
+    public function lacakPaketResi(Request $request)
+    {
+        $item = $this->getItemByResi($request->search);
+        if (!$item) {
+            return redirect()->route('customer.lacak-paket')->with('error', 'Resi tidak ditemukan!');
+        }
+        return view('customer.item.found-paket', [
+            'title' => 'Lacak Paket',
+            'page' => 'Paket',
+            'item' => $item,
+            'pathItemController' => \App\Http\Controllers\ItemController::class,
+        ]);
+    }
+
+    private function getItemByResi($resi)
+    {
+        $item = Item::with('trackingItems')
+            ->where('resi', $resi)
+            ->first();
+        return $item;
+    }
+
     public function riwayatPengiriman()
     {
         return view('customer.item.riwayat-pengiriman', [

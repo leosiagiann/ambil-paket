@@ -58,7 +58,7 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>
                                 @if ($item->resi)
-                                <span class="badge badge-info">{{ $item->resi }}</span>
+                                {{ $item->resi }}
                                 @else
                                 <span class="badge badge-danger">Resi belum dibuat</span>
                                 @endif
