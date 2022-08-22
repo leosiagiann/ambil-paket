@@ -28,14 +28,14 @@ class AdminController extends Controller
     {
         $customer->status = 'active';
         $customer->save();
-        return redirect()->route('admin.customer');
+        return redirect()->route('admin.customer')->with('success', 'Customer berhasil diaktifkan');
     }
 
     public function deactivateCustomer(User $customer)
     {
         $customer->status = 'inactive';
         $customer->save();
-        return redirect()->route('admin.customer');
+        return redirect()->route('admin.customer')->with('success', 'Customer berhasil dinonaktifkan');
     }
 
     public function destroyCustomer(User $customer)
