@@ -5,12 +5,22 @@
 <div class="container-fluid">
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <a href="{{ route('customer.item.create') }}" class="btn btn-success btn-icon-split">
-                <span class="icon text-white-50">
-                    <i class="fas fa-truck"></i>
-                </span>
-                <span class="text">Lacak Paket</span>
-            </a>
+            <!-- make search form with button icon -->
+            <div class="row">
+                <div class="col-md-4">
+                    <form action="{{ route('customer.lacak-paket-resi') }}" method="POST">
+                        @csrf
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="search" placeholder="Masukkan Resi Paket">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="submit">
+                                    <i class="fas fa-search fa-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
         <div class=" card-body">
             @if (session('success'))

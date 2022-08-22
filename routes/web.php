@@ -44,6 +44,7 @@ Route::name('customer.')->prefix('customer')->group(function () {
             Route::post('kirim-paket/Yes/{item}', [ItemController::class, 'confirmYes'])->name('item.confirmYes');
             Route::post('kirim-paket/No/{item}', [ItemController::class, 'confirmNo'])->name('item.confirmNo');
             Route::get('lacak-paket', [ItemController::class, 'lacakPaket'])->name('lacak-paket');
+            Route::post('lacak-paket', [ItemController::class, 'lacakPaketResi'])->name('lacak-paket-resi');
             Route::get('riwayat-pengiriman', [ItemController::class, 'riwayatPengiriman'])->name('riwayat-pengiriman');
         });
     });
