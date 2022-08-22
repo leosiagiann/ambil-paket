@@ -195,6 +195,10 @@ class ItemController extends Controller
 
     public function lacakPaketResi(Request $request)
     {
+        if ($this->validateSearchResi($request)) {
+            return redirect()->route('customer.lacak-paket')->with('error', 'Resi tidak valid!');
+        }
+
         $item = $this->getItemByResi($request->search);
         if (!$item) {
             return redirect()->route('customer.lacak-paket')->with('error', 'Resi tidak ditemukan!');
@@ -205,6 +209,15 @@ class ItemController extends Controller
             'item' => $item,
             'pathItemController' => \App\Http\Controllers\ItemController::class,
         ]);
+    }
+
+    private function validateSearchResi(Request $request)
+    {
+        if (!$request->search) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     private function getItemByResi($resi)
