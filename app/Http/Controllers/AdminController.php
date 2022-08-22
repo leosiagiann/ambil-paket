@@ -60,7 +60,7 @@ class AdminController extends Controller
     {
         return view('admin.agen.index', [
             'title' => 'Agen',
-            'agens' => $this->getAllAgens(),
+            'agens' => $this->getAllAgen(),
             'page' => 'Users',
         ]);
     }
