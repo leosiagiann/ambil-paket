@@ -32,7 +32,6 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Resi</th>
                             <th>Pengirim</th>
                             <th>Penerima</th>
                             <th>Harga</th>
@@ -47,13 +46,6 @@
                         @foreach ($items as $item)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>
-                                @if ($item->resi)
-                                {{ $item->resi }}
-                                @else
-                                -
-                                @endif
-                            </td>
                             <td>
                                 <button type="button" class="btn btn-primary btn-icon-split" data-toggle="modal"
                                     data-target="#sender{{ $item->id }}">

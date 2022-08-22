@@ -188,6 +188,8 @@ class ItemController extends Controller
         return view('customer.item.lacak-paket', [
             'title' => 'Lacak Paket',
             'page' => 'Paket',
+            'items' => $this->getAllItemsLacak(),
+            'pathItemController' => \App\Http\Controllers\ItemController::class,
         ]);
     }
 
@@ -265,7 +267,16 @@ class ItemController extends Controller
     {
         return Item::with('sender', 'receiver', 'bank')
             ->where('user_id', auth()->user()->id)
-            ->whereNotIn('status', ['canceled', 'rejected'])
+            ->where('status', ['request', 'accepted', 'ok', 'paid'])
+            ->latest()
+            ->get();
+    }
+
+    private function getAllItemsLacak()
+    {
+        return Item::with('sender', 'receiver', 'bank')
+            ->where('user_id', auth()->user()->id)
+            ->where('status', 'process')
             ->latest()
             ->get();
     }
