@@ -105,6 +105,39 @@
                                 </button>
                             </td>
                             @endif
+                            <!-- modal addPositionItem{{ $item->id }} -->
+                            <div class="modal fade" id="addPositionItem{{ $item->id }}" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Perbaharui Posisi
+                                                Paket</h5>
+                                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">×</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="" method="POST">
+                                                @csrf
+                                                <div class="form-group">
+                                                    <label for="status">Posisi</label>
+                                                    <textarea name="status" id="status" cols="30" rows="10"
+                                                        class="form-control"
+                                                        placeholder="Posisi Paket Terbaru"></textarea>
+                                                </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal
+                                                <i class="fas fa-times"></i></button>
+                                            <button class="btn btn-primary" type="submit">Tambah <i
+                                                    class="fas fa-plus"></i></button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end modal addPositionItem{{ $item->id }} -->
                             <!-- modal for download proof -->
                             <div class="modal fade" id="proof{{ $item->id }}" tabindex="-1" role="dialog"
                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
