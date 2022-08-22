@@ -60,6 +60,7 @@ Route::name('agen.')->prefix('agen')->group(function () {
             Route::post('accept-paket/{item}', [AgenController::class, 'acceptConfirm'])->name('confirm.accept');
 
             Route::get('info-paket', [AgenController::class, 'infoPaket'])->name('info-paket');
+            Route::post('info-paket/{item}', [AgenController::class, 'tambahPosisi'])->name('tambah-posisi-paket');
         });
     });
 });

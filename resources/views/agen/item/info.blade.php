@@ -118,7 +118,8 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <form action="" method="POST">
+                                            <form action="{{ route('agen.tambah-posisi-paket', $item->id)}}"
+                                                method="POST">
                                                 @csrf
                                                 <div class="form-group">
                                                     <label for="status">Posisi</label>

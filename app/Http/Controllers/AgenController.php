@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Bank;
 use App\Models\Item;
+use App\Models\TrackingItem;
 
 class AgenController extends Controller
 {
@@ -71,6 +72,15 @@ class AgenController extends Controller
             'items' => $this->getAllItemInfo(),
             'pathAgenController' => \App\Http\Controllers\AgenController::class,
         ]);
+    }
+
+    public function tambahPosisi(Request $request, Item $item)
+    {
+        $trackingItem = new TrackingItem();
+        $trackingItem->item_id = $item->id;
+        $trackingItem->status = $request->status;
+        $trackingItem->save();
+        return redirect()->route('agen.info-paket')->with('success', 'Posisi Paket berhasil ditambahkan');
     }
 
     private function getFirstBankUser()
