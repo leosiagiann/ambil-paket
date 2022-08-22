@@ -58,14 +58,14 @@ class AdminController extends Controller
     {
         $agen->status = 'active';
         $agen->save();
-        return redirect()->route('admin.agen');
+        return redirect()->route('admin.agen')->with('success', 'Agen berhasil diaktifkan');
     }
 
     public function deactivateAgen(User $agen)
     {
         $agen->status = 'freeze';
         $agen->save();
-        return redirect()->route('admin.agen');
+        return redirect()->route('admin.agen')->with('success', 'Agen berhasil dinonaktifkan');
     }
 
     public function destroyAgen(User $agen)
