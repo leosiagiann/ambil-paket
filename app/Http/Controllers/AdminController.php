@@ -74,6 +74,24 @@ class AdminController extends Controller
         ]);
     }
 
+    public function generateResi(Item $item)
+    {
+        $item->resi = $this->generateResiNumber();
+        $item->save();
+        return redirect()->route('admin.item.pengiriman')->with('success', 'Resi berhasil dicetak');
+    }
+
+    private function generateResiNumber()
+    {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_+=-';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < 16; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
+    }
+
     private function getAllItemPengiriman()
     {
         return Item::where('status', 'process')
