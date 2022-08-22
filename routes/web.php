@@ -94,6 +94,9 @@ Route::name('admin.')->prefix('admin')->group(function () {
             Route::get('agen/activate/{agen}', [AdminController::class, 'activateAgen'])->name('agen.activate');
             Route::get('agen/deactivate/{agen}', [AdminController::class, 'deactivateAgen'])->name('agen.deactivate');
             Route::delete('agen/{agen}', [AdminController::class, 'destroyAgen'])->name('agen.destroy');
+
+            Route::get('item', [AdminController::class, 'item'])->name('item');
+            Route::get('item-pengiriman', [AdminController::class, 'pengirimanItem'])->name('item.pengiriman');
         });
     });
 });

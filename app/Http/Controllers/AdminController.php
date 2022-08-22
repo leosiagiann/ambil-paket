@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Item;
+
 
 class AdminController extends Controller
 {
@@ -21,6 +23,15 @@ class AdminController extends Controller
             'title' => 'Customer',
             'customers' => $this->getAllCustomer(),
             'page' => 'Users',
+        ]);
+    }
+
+    public function item()
+    {
+        return view('admin.item.index', [
+            'title' => 'Paket',
+            'items' => $this->getAllItem(),
+            'page' => 'Paket',
         ]);
     }
 
@@ -49,9 +60,25 @@ class AdminController extends Controller
     {
         return view('admin.agen.index', [
             'title' => 'Agen',
-            'agens' => $this->getAllAgen(),
+            'agens' => $this->getAllAgens(),
             'page' => 'Users',
         ]);
+    }
+
+    public function pengirimanItem()
+    {
+        return view('admin.item.pengiriman', [
+            'title' => 'Pengiriman Paket',
+            'items' => $this->getAllItemPengiriman(),
+            'page' => 'Paket',
+        ]);
+    }
+
+    private function getAllItemPengiriman()
+    {
+        return Item::where('status', 'process')
+            ->latest()
+            ->get();
     }
 
     public function activateAgen(User $agen)
@@ -86,6 +113,17 @@ class AdminController extends Controller
     {
         return User::where('role_id', '4')
             ->orderBy('created_at', 'desc')
+            ->get();
+    }
+
+    private function getAllItem()
+    {
+        return Item::with('sender', 'receiver', 'bank')
+            ->where('status', 'request')
+            ->orWhere('status', 'accepted')
+            ->orWhere('status', 'ok')
+            ->orWhere('status', 'paid')
+            ->latest()
             ->get();
     }
 }
