@@ -21,7 +21,7 @@ class AgenController extends Controller
         return view('agen.item.confirm', [
             'title' => 'Konfirmasi Paket',
             'page' => 'Paket',
-            'items' => $this->getAllItemRequest(),
+            'items' => $this->getAllItem(),
             'pathAgenController' => \App\Http\Controllers\AgenController::class,
         ]);
     }
@@ -63,17 +63,34 @@ class AgenController extends Controller
         return redirect()->route('agen.confirm')->with('success', 'Paket berhasil ditolak');
     }
 
+    public function infoPaket()
+    {
+        return view('agen.item.info', [
+            'title' => 'Lacak Paket',
+            'page' => 'Paket',
+            'items' => $this->getAllItemInfo(),
+            'pathAgenController' => \App\Http\Controllers\AgenController::class,
+        ]);
+    }
+
     private function getFirstBankUser()
     {
         return auth()->user()->banks->first();
     }
 
-    private function getAllItemRequest()
+    private function getAllItem()
     {
         return Item::where('status', 'request')
             ->orWhere('status', 'accepted')
             ->orWhere('status', 'ok')
             ->orWhere('status', 'paid')
+            ->latest()
+            ->get();
+    }
+
+    private function getAllItemInfo()
+    {
+        return Item::where('status', 'process')
             ->latest()
             ->get();
     }

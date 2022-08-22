@@ -30,7 +30,7 @@
                 <a class="collapse-item {{ $title == 'Konfirmasi Paket' ? 'active' : ''}}"
                     href="{{ route('agen.confirm') }}">Konfirmasi Paket</a>
                 <a class="collapse-item {{ $title == 'Lacak Paket' ? 'active' : ''}}"
-                    href="{{ route('customer.lacak-paket') }}">Lacak
+                    href="{{ route('agen.info-paket') }}">Infokan
                     Paket</a>
                 <a class="collapse-item {{ $title == 'Riwayat Pengiriman' ? 'active' : ''}}"
                     href="{{ route('customer.riwayat-pengiriman') }}">Riwayat

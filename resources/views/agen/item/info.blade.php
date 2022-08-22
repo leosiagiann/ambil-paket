@@ -29,6 +29,7 @@
                     <thead>
                         <tr>
                             <th>No</th>
+                            <th>Resi</th>
                             <th>Pengirim</th>
                             <th>Penerima</th>
                             <th>Harga</th>
@@ -48,6 +49,13 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>
+                                @if ($item->resi == null)
+                                <span class="badge badge-danger">Resi Belum Dibuat</span>
+                                @else
+                                {{ $item->resi }}
+                                @endif
+                            </td>
+                            <td>
                                 <button type="button" class="btn btn-primary btn-icon-split" data-toggle="modal"
                                     data-target="#sender{{ $item->id }}">
                                     <span class="text">Lihat</span>
@@ -60,31 +68,13 @@
                                 </button>
                             </td>
                             <td>
-                                @if (!$item->price)
-                                <span class="badge badge-warning">Belum Ditentukan</span>
-                                @else
                                 Rp. {{ number_format($item->price, 0, ',', '.') }}
-                                @endif
                             </td>
                             <td>
-                                @if (!$item->time_delivery)
-                                <span class="badge badge-warning">Belum Ditentukan</span>
-                                @else
                                 {{ $item->time_delivery }} hari
-                                @endif
                             </td>
                             <td>
-                                @if ($item->status == 'request')
-                                <span class="badge badge-warning">Silahkan Konfirmasi</span>
-                                @elseif ($item->status == 'accepted')
-                                <span class="badge badge-warning">Konfirmasi Customer</span>
-                                @elseif ($item->status == 'ok')
-                                <span class="badge badge-warning">Menunggu Pembayaran</span>
-                                @elseif ($item->status == 'done')
-                                <span class="badge badge-primary">{{ $item->status }}</span>
-                                @elseif ($item->status == 'paid')
-                                <span class="badge badge-danger">Konfrimasi Pembayaran</span>
-                                @endif
+                                Pengiriman
                             </td>
                             <td>
                                 @if ($item->note)
@@ -109,87 +99,12 @@
                                 @endif
                             </td>
                             <td>
-                                @if ($item->status == 'request')
                                 <button type="button" class="btn btn-success btn-icon-split" data-toggle="modal"
-                                    data-target="#confirmY{{ $item->id }}">
-                                    <span class="text">Terima</span>
+                                    data-target="#addPositionItem{{ $item->id }}">
+                                    <span class="text">Perbaharui Posisi Paket</span>
                                 </button>
-                                <button type="button" class="btn btn-danger btn-icon-split" data-toggle="modal"
-                                    data-target="#confirmX{{ $item->id }}">
-                                    <span class="text">Tolak</span>
-                                </button>
-                                @elseif ($item->status == 'accepted')
-                                <span class="badge badge-success">Konfirmasi Customer</span>
-                                @elseif ($item->status == 'paid')
-                                <button type="button" class="btn btn-success btn-icon-split" data-toggle="modal"
-                                    data-target="#process{{ $item->id }}">
-                                    <span class="text">Proses</span>
-                                </button>
-                                <button type="button" class="btn btn-danger btn-icon-split" data-toggle="modal"
-                                    data-target="#notProcess{{ $item->id }}">
-                                    <span class="text">Tolak</span>
-                                </button>
-                                @elseif ($item->status == 'done')
-                                <button type="button" class="btn btn-primary btn-icon-split" data-toggle="modal"
-                                    data-target="#done{{ $item->id }}">
-                                    <span class="text">Selesai</span>
-                                </button>
-                                @endif
                             </td>
                             @endif
-                            <!-- modal process{{ $item->id }} -->
-                            <div class="modal fade" id="process{{ $item->id }}" tabindex="-1" role="dialog"
-                                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Konfirmasi Proses</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <p>Apakah anda yakin ingin melanjutkan proses pengiriman?</p>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-dismiss="modal">Tidak</button>
-                                            <form action="{{ route('agen.confirm.process', $item->id) }}" method="GET">
-                                                @csrf
-                                                <button type="submit" class="btn btn-success">Ya</button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- end modal process{{ $item->id }} -->
-                            <!-- modal notProcess{{ $item->id }} -->
-                            <div class="modal fade" id="notProcess{{ $item->id }}" tabindex="-1" role="dialog"
-                                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Konfirmasi Tolak</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <p>Apakah anda yakin ingin menolak pengiriman?</p>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-dismiss="modal">Tidak</button>
-                                            <form action="{{ route('agen.confirm.notProcess', $item->id) }}"
-                                                method="GET">
-                                                @csrf
-                                                <button type="submit" class="btn btn-success">Ya</button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- end modal notProcess{{ $item->id }} -->
                             <!-- modal for download proof -->
                             <div class="modal fade" id="proof{{ $item->id }}" tabindex="-1" role="dialog"
                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -217,69 +132,6 @@
                                 </div>
                             </div>
                             <!-- end modal proof{{ $item->id }} -->
-                            <!-- modal confirmX -->
-                            <div class="modal fade" id="confirmX{{ $item->id }}" tabindex="-1" role="dialog"
-                                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Tolak Paket</h5>
-                                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">×</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form action="{{ route('agen.confirm.reject', $item->id) }}" method="POST">
-                                                @csrf
-                                                <div class="form-group">
-                                                    <label for="">Catatan</label>
-                                                    <textarea class="form-control" name="note" rows="3"></textarea>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button class="btn btn-secondary" type="button"
-                                                        data-dismiss="modal">Batal</button>
-                                                    <button class="btn btn-primary" type="submit">Tolak</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- end modal confirmX -->
-                            <!-- modal confirmY -->
-                            <div class="modal fade" id="confirmY{{ $item->id }}" tabindex="-1" role="dialog"
-                                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Terima Paket</h5>
-                                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">×</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form action="{{ route('agen.confirm.accept', $item->id) }}" method="POST">
-                                                @csrf
-                                                <div class="form-group">
-                                                    <label for="">Harga</label>
-                                                    <input type="number" class="form-control" name="price"
-                                                        placeholder="Harga" required>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="">Estimasi Waktu</label>
-                                                    <input type="number" class="form-control" name="time_delivery"
-                                                        placeholder="Estimasi Waktu" required>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button class="btn btn-secondary" type="button"
-                                                        data-dismiss="modal">Batal</button>
-                                                    <button class="btn btn-primary" type="submit">Terima</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                             <!-- modal sender{{ $item->id }} -->
                             <div class="modal fade" id="sender{{ $item->id }}" tabindex="-1" role="dialog"
                                 aria-labelledby="exampleModalLabel" aria-hidden="true">

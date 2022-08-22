@@ -58,6 +58,8 @@ Route::name('agen.')->prefix('agen')->group(function () {
             Route::get('konfirmasi-paket/notProcess/{item}', [AgenController::class, 'notProcessPaket'])->name('confirm.notProcess');
             Route::post('reject-paket/{item}', [AgenController::class, 'rejectConfirm'])->name('confirm.reject');
             Route::post('accept-paket/{item}', [AgenController::class, 'acceptConfirm'])->name('confirm.accept');
+
+            Route::get('info-paket', [AgenController::class, 'infoPaket'])->name('info-paket');
         });
     });
 });
