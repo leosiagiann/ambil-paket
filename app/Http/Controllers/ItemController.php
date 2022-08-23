@@ -233,7 +233,20 @@ class ItemController extends Controller
         return view('customer.item.riwayat-pengiriman', [
             'title' => 'Riwayat Pengiriman',
             'page' => 'Paket',
+            'items' => $this->getItemHistory(),
+            'pathItemController' => \App\Http\Controllers\ItemController::class,
         ]);
+    }
+
+    private function getItemHistory()
+    {
+        return Item::with('sender', 'receiver', 'bank')
+            ->where('user_id', auth()->user()->id)
+            ->where('status', 'done')
+            ->orWhere('status', 'canceled')
+            ->orWhere('status', 'rejected')
+            ->latest()
+            ->get();
     }
 
     private function validateSelf()
