@@ -81,6 +81,8 @@
                                 <span class="badge badge-danger">Dibatalkan oleh Pengirim</span>
                                 @elseif ($item->status == 'rejected')
                                 <span class="badge badge-danger">Ditolak oleh Agen</span>
+                                @elseif ($item->status == 'not_process')
+                                <span class="badge badge-warning">Pembayaran Ditolak</span>
                                 @endif
                             </td>
                             <td>
