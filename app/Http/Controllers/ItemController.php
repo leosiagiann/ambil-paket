@@ -240,13 +240,16 @@ class ItemController extends Controller
 
     private function getItemHistory()
     {
-        return Item::with('sender', 'receiver', 'bank')
-            ->where('user_id', auth()->user()->id)
+        $items =  Item::with('sender', 'receiver', 'bank')
             ->where('status', 'done')
             ->orWhere('status', 'canceled')
             ->orWhere('status', 'rejected')
+            ->orWhere('status', 'not_process')
             ->latest()
             ->get();
+        $items = $items->filter(function ($item) {
+            return $item->user_id == auth()->user()->id;
+        });
     }
 
     private function validateSelf()
