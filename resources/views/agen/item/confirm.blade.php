@@ -80,8 +80,6 @@
                                 <span class="badge badge-warning">Konfirmasi Customer</span>
                                 @elseif ($item->status == 'ok')
                                 <span class="badge badge-warning">Menunggu Pembayaran</span>
-                                @elseif ($item->status == 'done')
-                                <span class="badge badge-primary">{{ $item->status }}</span>
                                 @elseif ($item->status == 'paid')
                                 <span class="badge badge-danger">Konfrimasi Pembayaran</span>
                                 @endif
@@ -119,7 +117,7 @@
                                     <span class="text">Tolak</span>
                                 </button>
                                 @elseif ($item->status == 'accepted')
-                                <span class="badge badge-success">Konfirmasi Customer</span>
+                                <span class="badge badge-warning">Konfirmasi Customer</span>
                                 @elseif ($item->status == 'paid')
                                 <button type="button" class="btn btn-success btn-icon-split" data-toggle="modal"
                                     data-target="#process{{ $item->id }}">
@@ -129,11 +127,8 @@
                                     data-target="#notProcess{{ $item->id }}">
                                     <span class="text">Tolak</span>
                                 </button>
-                                @elseif ($item->status == 'done')
-                                <button type="button" class="btn btn-primary btn-icon-split" data-toggle="modal"
-                                    data-target="#done{{ $item->id }}">
-                                    <span class="text">Selesai</span>
-                                </button>
+                                @elseif ($item->status == 'ok')
+                                <span class="badge badge-warning">Menunggu Pembayaran</span>
                                 @endif
                             </td>
                             @endif
