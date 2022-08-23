@@ -74,6 +74,30 @@ class AgenController extends Controller
         ]);
     }
 
+    public function riwayatPengiriman()
+    {
+        return view('agen.item.riwayat-pengiriman', [
+            'title' => 'Riwayat Pengiriman',
+            'page' => 'Paket',
+            'items' => $this->getItemHistory(),
+            'pathAgenController' => \App\Http\Controllers\AgenController::class,
+        ]);
+    }
+
+
+
+    private function getItemHistory()
+    {
+        $items =  Item::with('sender', 'receiver', 'bank')
+            ->where('status', 'done')
+            ->orWhere('status', 'canceled')
+            ->orWhere('status', 'rejected')
+            ->orWhere('status', 'not_process')
+            ->latest()
+            ->get();
+        return $items;
+    }
+
     public function tambahPosisi(Request $request, Item $item)
     {
         $trackingItem = new TrackingItem();

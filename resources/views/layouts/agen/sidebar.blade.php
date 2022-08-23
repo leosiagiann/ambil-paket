@@ -33,7 +33,7 @@
                     href="{{ route('agen.info-paket') }}">Infokan
                     Paket</a>
                 <a class="collapse-item {{ $title == 'Riwayat Pengiriman' ? 'active' : ''}}"
-                    href="{{ route('customer.riwayat-pengiriman') }}">Riwayat
+                    href="{{ route('agen.riwayat-pengiriman') }}">Riwayat
                     Pengiriman</a>
             </div>
         </div>

@@ -60,6 +60,9 @@ Route::name('agen.')->prefix('agen')->group(function () {
             Route::post('reject-paket/{item}', [AgenController::class, 'rejectConfirm'])->name('confirm.reject');
             Route::post('accept-paket/{item}', [AgenController::class, 'acceptConfirm'])->name('confirm.accept');
 
+
+            Route::get('riwayat-pengiriman', [AgenController::class, 'riwayatPengiriman'])->name('riwayat-pengiriman');
+
             Route::get('info-paket', [AgenController::class, 'infoPaket'])->name('info-paket');
             Route::post('info-paket/{item}', [AgenController::class, 'tambahPosisi'])->name('tambah-posisi-paket');
             Route::post('info-paket/finish/{item}', [AgenController::class, 'finishPosisi'])->name('finish-posisi-paket');
