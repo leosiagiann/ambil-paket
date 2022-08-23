@@ -29,6 +29,9 @@ class AgenController extends Controller
 
     public function rejectConfirm(Request $request, Item $item)
     {
+        if (!$this->getFirstBankUser()) {
+            return redirect()->route('agen.confirm')->with('error', 'Gagal mengkonfirmasi paket, bank anda belum terdaftar');
+        }
         $item->status = 'rejected';
         if ($request->note) {
             $item->note = $request->note;
