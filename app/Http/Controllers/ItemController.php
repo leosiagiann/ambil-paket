@@ -313,11 +313,17 @@ class ItemController extends Controller
 
     private function getAllItems()
     {
-        return Item::with('sender', 'receiver', 'bank')
-            ->where('user_id', auth()->user()->id)
-            ->where('status', ['request', 'accepted', 'ok', 'paid'])
+        $items = Item::with('sender', 'receiver', 'bank')
+            ->where('status', 'request')
+            ->orWhere('status', 'accepted')
+            ->orWhere('status', 'ok')
+            ->orWhere('status', 'paid')
             ->latest()
             ->get();
+        $items = $items->filter(function ($item) {
+            return $item->user_id == auth()->user()->id;
+        });
+        return $items;
     }
 
     private function getAllItemsLacak()

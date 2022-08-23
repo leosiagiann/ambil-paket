@@ -44,7 +44,7 @@
                         @php
                         $user_id = $pathAgenController::getIdUserItem($item->bank_id);
                         @endphp
-                        @if ($user_id == auth()->user()->id)
+                        @if ($item-> status == 'request' || $user_id == auth()->user()->id)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>
