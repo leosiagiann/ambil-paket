@@ -76,13 +76,13 @@
                             </td>
                             <td>
                                 @if ($item->status == 'done')
-                                <span class="badge badge-info">Sudah Diterima</span>
+                                <span class="badge badge-success">Sudah Diterima</span>
                                 @elseif ($item->status == 'canceled')
                                 <span class="badge badge-danger">Dibatalkan oleh Pengirim</span>
                                 @elseif ($item->status == 'rejected')
                                 <span class="badge badge-danger">Ditolak oleh Agen</span>
                                 @elseif ($item->status == 'not_process')
-                                <span class="badge badge-warning">Pembayaran Ditolak</span>
+                                <span class="badge badge-danger">Pembayaran Ditolak</span>
                                 @endif
                             </td>
                             <td>

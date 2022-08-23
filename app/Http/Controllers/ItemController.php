@@ -250,6 +250,7 @@ class ItemController extends Controller
         $items = $items->filter(function ($item) {
             return $item->user_id == auth()->user()->id;
         });
+        return $items;
     }
 
     private function validateSelf()
