@@ -33,6 +33,7 @@ class AgenController extends Controller
         if ($request->note) {
             $item->note = $request->note;
         }
+        $item->bank_id = $this->getFirstBankUser()->id;
         $item->save();
         return redirect()->route('agen.confirm')->with('success', 'Paket berhasil ditolak');
     }
