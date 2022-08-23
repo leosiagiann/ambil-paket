@@ -83,6 +83,17 @@ class AgenController extends Controller
         return redirect()->route('agen.info-paket')->with('success', 'Posisi Paket berhasil ditambahkan');
     }
 
+    public function finishPosisi(Item $item)
+    {
+        $trackingItem = new TrackingItem();
+        $trackingItem->item_id = $item->id;
+        $trackingItem->status = "Paket Telah Diterima";
+        $trackingItem->save();
+        $item->status = 'done';
+        $item->save();
+        return redirect()->route('agen.info-paket')->with('success', 'Paket berhasil dikirim');
+    }
+
     private function getFirstBankUser()
     {
         return auth()->user()->banks->first();
