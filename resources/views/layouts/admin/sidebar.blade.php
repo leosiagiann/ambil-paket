@@ -50,7 +50,7 @@
                     href="{{ route('admin.item.pengiriman') }}">Pengiriman
                     Paket</a>
                 <a class="collapse-item {{ $title == 'Riwayat Pengiriman' ? 'active' : ''}}"
-                    href="{{ route('customer.riwayat-pengiriman') }}">Riwayat
+                    href="{{ route('admin.riwayat-pengiriman') }}">Riwayat
                     Pengiriman</a>
             </div>
         </div>

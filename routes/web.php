@@ -102,6 +102,9 @@ Route::name('admin.')->prefix('admin')->group(function () {
             Route::get('item', [AdminController::class, 'item'])->name('item');
             Route::get('item-pengiriman', [AdminController::class, 'pengirimanItem'])->name('item.pengiriman');
             Route::get('item-pengiriman/{item}', [AdminController::class, 'generateResi'])->name('item.generateResi');
+
+
+            Route::get('riwayat-pengiriman', [AdminController::class, 'riwayatPengiriman'])->name('riwayat-pengiriman');
         });
     });
 });

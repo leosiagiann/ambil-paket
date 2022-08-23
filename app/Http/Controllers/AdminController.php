@@ -120,6 +120,27 @@ class AdminController extends Controller
         return redirect()->route('admin.agen')->with('success', 'Agen with email ' . $agenDel->email . ' has been deleted.');
     }
 
+    public function riwayatPengiriman()
+    {
+        return view('admin.item.riwayat-pengiriman', [
+            'title' => 'Riwayat Pengiriman',
+            'items' => $this->getAllItemRiwayat(),
+            'page' => 'Paket',
+        ]);
+    }
+
+    private function getAllItemRiwayat()
+    {
+        $items =  Item::with('sender', 'receiver', 'bank')
+            ->where('status', 'done')
+            ->orWhere('status', 'canceled')
+            ->orWhere('status', 'rejected')
+            ->orWhere('status', 'not_process')
+            ->latest()
+            ->get();
+        return $items;
+    }
+
     private function getAllCustomer()
     {
         return User::where('role_id', '5')
