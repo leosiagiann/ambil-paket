@@ -62,6 +62,7 @@ Route::name('agen.')->prefix('agen')->group(function () {
 
             Route::get('info-paket', [AgenController::class, 'infoPaket'])->name('info-paket');
             Route::post('info-paket/{item}', [AgenController::class, 'tambahPosisi'])->name('tambah-posisi-paket');
+            Route::post('info-paket/finish/{item}', [AgenController::class, 'finishPosisi'])->name('finish-posisi-paket');
         });
     });
 });

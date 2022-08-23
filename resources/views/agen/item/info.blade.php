@@ -103,8 +103,39 @@
                                     data-target="#addPositionItem{{ $item->id }}">
                                     <span class="text">Perbaharui Posisi Paket</span>
                                 </button>
+                                <button type="button" class="btn btn-success btn-icon-split" data-toggle="modal"
+                                    data-target="#finishPositionItem{{ $item->id }}">
+                                    <span class="text">Paket telah dikirim</span>
+                                </button>
                             </td>
                             @endif
+                            <!-- modal finishPositionItem{{ $item->id }} -->
+                            <div class="modal fade" id="finishPositionItem{{ $item->id }}" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Konfirmasi</h5>
+                                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">×</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Apakah anda yakin ingin mengkonfirmasi paket telah dikirim?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="btn btn-secondary" type="button"
+                                                data-dismiss="modal">Batal</button>
+                                            <form action="{{ route('agen.finish-posisi-paket', $item->id) }}"
+                                                method="POST">
+                                                @csrf
+                                                <button class="btn btn-success" type="submit">Konfirmasi</button>
+                                        </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end modal finishPositionItem{{ $item->id }} -->
                             <!-- modal addPositionItem{{ $item->id }} -->
                             <div class="modal fade" id="addPositionItem{{ $item->id }}" tabindex="-1" role="dialog"
                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
