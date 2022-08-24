@@ -234,7 +234,6 @@ class ItemController extends Controller
             'title' => 'Riwayat Pengiriman',
             'page' => 'Paket',
             'items' => $this->getItemHistory(),
-            'pathItemController' => \App\Http\Controllers\ItemController::class,
         ]);
     }
 
