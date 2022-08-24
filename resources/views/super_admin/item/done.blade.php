@@ -1,5 +1,5 @@
 @extends('layouts.template')
-@include('layouts.finance.sidebar')
+@include('layouts.super_admin.sidebar')
 @include('layouts.navbar')
 @section('content')
 <div class="container-fluid">
