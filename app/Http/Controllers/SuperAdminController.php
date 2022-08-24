@@ -335,6 +335,13 @@ class SuperAdminController extends Controller
         $customer->save();
         return redirect()->route('admin.customer')->with('success', 'Customer berhasil dinonaktifkan');
     }
+
+    public function destroyCustomer(User $customer)
+    {
+        $customerDel = $customer;
+        $customer->delete();
+        return redirect()->route('admin.customer')->with('success', 'Customer with email ' . $customerDel->email . ' has been deleted.');
+    }
     /* CUSTOMER */
 
     /* AGEN */
