@@ -189,7 +189,6 @@ class ItemController extends Controller
             'title' => 'Lacak Paket',
             'page' => 'Paket',
             'items' => $this->getAllItemsLacak(),
-            'pathItemController' => \App\Http\Controllers\ItemController::class,
         ]);
     }
 
@@ -207,7 +206,6 @@ class ItemController extends Controller
             'title' => 'Lacak Paket',
             'page' => 'Paket',
             'item' => $item,
-            'pathItemController' => \App\Http\Controllers\ItemController::class,
         ]);
     }
 
