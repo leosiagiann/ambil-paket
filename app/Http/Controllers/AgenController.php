@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Bank;
 use App\Models\Item;
+use App\Models\User;
 use App\Models\TrackingItem;
 
 class AgenController extends Controller
@@ -14,7 +15,54 @@ class AgenController extends Controller
         return view('agen.index', [
             'title' => 'Dashboard',
             'page' => 'Dashboard',
+            'agens' => $this->getCountAgen(),
+            'customers' => $this->getCountCustomer(),
+            'items' => $this->getCountItem(),
+            'itemCancels' => $this->getCountItemCancel(),
         ]);
+    }
+
+    private function getUserIDFromBank($bank_id)
+    {
+        $user_id = Bank::where('id', $bank_id)->first()->user_id;
+        return $user_id;
+    }
+
+    public function getCountItemCancel()
+    {
+        $items =  Item::where('status', 'rejected')
+        ->orWhere('status', 'canceled')
+        ->orWhere('status', 'not_process')
+        ->get();
+
+        $items = $items->filter(function ($item) {
+            return $this->getUserIDFromBank($item->bank_id) == auth()->user()->id;
+        });
+        
+        return $items->count();
+    }
+
+    public function getCountItem()
+    {
+        $items =  Item::where('status', 'done')
+        ->get();
+
+        $items = $items->filter(function ($item) {
+            return $this->getUserIDFromBank($item->bank_id) == auth()->user()->id;
+        });
+
+        return $items->count();
+    }   
+
+    public function getCountCustomer()
+    {
+        return User::where('role_id', 5)->count();
+    }
+
+    private function getCountAgen()
+    {
+        $agen = User::where('role_id', 4)->count();
+        return $agen;
     }
 
     public function confirmPaket()
