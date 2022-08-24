@@ -305,6 +305,7 @@ class SuperAdminController extends Controller
             ->get();
     }
 
+    /* CUSTOMER */
     public function customer()
     {
         return view('super_admin.customer.index', [
@@ -314,13 +315,22 @@ class SuperAdminController extends Controller
         ]);
     }
 
+    public function activateCustomer(User $customer)
+    {
+        $customer->status = 'active';
+        $customer->save();
+        return redirect()->route('admin.customer')->with('success', 'Customer berhasil diaktifkan');
+    }
+
     private function getAllCustomer()
     {
         return User::where('role_id', '5')
             ->latest()
             ->get();
     }
+    /* CUSTOMER */
 
+    /* AGEN */
     public function agen()
     {
         return view('super_admin.agen.index', [
@@ -357,4 +367,5 @@ class SuperAdminController extends Controller
         $agen->delete();
         return redirect()->route('admin.agen')->with('success', 'Agen with email ' . $agenDel->email . ' has been deleted.');
     }
+    /* AGEN */
 }
