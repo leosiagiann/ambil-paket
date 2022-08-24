@@ -38,7 +38,6 @@
                                 @endif
                             </td>
                             <td>
-                                <!-- make icon on of for active or inactiove users -->
                                 @if ($agen->status == 'active')
                                 <a href="{{ route('admin.agen.deactivate', $agen->id) }}" class="btn btn-danger btn-sm">
                                     <i class="fas fa-user-times"></i>

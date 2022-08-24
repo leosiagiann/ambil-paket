@@ -5,7 +5,6 @@
 <div class="container-fluid">
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <!-- make search form with button icon -->
             <div class="row">
                 <div class="col-md-4">
                     <form action="{{ route('customer.lacak-paket-resi') }}" method="POST">

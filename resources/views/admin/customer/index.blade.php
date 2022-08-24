@@ -38,7 +38,6 @@
                                 @endif
                             </td>
                             <td>
-                                <!-- make icon on of for active or inactiove users -->
                                 @if ($customer->status == 'active')
                                 <a href="{{ route('admin.customer.deactivate', $customer->id) }}"
                                     class="btn btn-danger btn-sm">
@@ -51,12 +50,10 @@
                                 </a>
                                 @endif
                                 |
-                                <!-- make icon for delete and link to modal -->
                                 <a class="btn btn-danger btn-sm" data-toggle="modal"
                                     data-target="#deleteCustomer{{$customer->id}}">
                                     <i class="fas fa-trash"></i>
                                 </a>
-                                <!-- make modal with id deleteCustomer -->
                                 <div class="modal fade" id="deleteCustomer{{$customer->id}}" tabindex="-1" role="dialog"
                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
