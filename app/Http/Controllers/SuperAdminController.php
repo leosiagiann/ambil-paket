@@ -251,7 +251,7 @@ class SuperAdminController extends Controller
 
     public function item()
     {
-        return view('finance.item.index', [
+        return view('super_admin.item.index', [
             'title' => 'Pengiriman Paket',
             'items' => $this->getAllItem(),
             'page' => 'Paket',
@@ -260,7 +260,7 @@ class SuperAdminController extends Controller
 
     public function itemDone()
     {
-        return view('finance.item.done', [
+        return view('super_admin.item.done', [
             'title' => 'Riwayat Pengiriman',
             'items' => $this->getAllItemDone(),
             'page' => 'Paket',
@@ -269,7 +269,7 @@ class SuperAdminController extends Controller
 
     public function itemCancel()
     {
-        return view('finance.item.cancel', [
+        return view('super_admin.item.cancel', [
             'title' => 'Riwayat Penolakan',
             'items' => $this->getAllItemCancel(),
             'page' => 'Paket',
