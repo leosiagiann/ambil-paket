@@ -320,4 +320,20 @@ class SuperAdminController extends Controller
             ->latest()
             ->get();
     }
+
+    public function agen()
+    {
+        return view('super_admin.agen.index', [
+            'title' => 'Agen',
+            'agens' => $this->getAllAgen(),
+            'page' => 'Users',
+        ]);
+    }
+
+    private function getAllAgen()
+    {
+        return User::where('role_id', '4')
+            ->latest()
+            ->get();
+    }
 }
