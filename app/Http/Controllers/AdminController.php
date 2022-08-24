@@ -151,7 +151,7 @@ class AdminController extends Controller
     private function getAllAgen()
     {
         return User::where('role_id', '4')
-            ->orderBy('created_at', 'desc')
+            ->latest()
             ->get();
     }
 
