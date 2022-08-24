@@ -336,4 +336,11 @@ class SuperAdminController extends Controller
             ->latest()
             ->get();
     }
+
+    public function activateAgen(User $agen)
+    {
+        $agen->status = 'active';
+        $agen->save();
+        return redirect()->route('admin.agen')->with('success', 'Agen berhasil diaktifkan');
+    }
 }
