@@ -31,6 +31,10 @@
                     href="{{ route('super_admin.admin') }}">Admin</a>
                 <a class="collapse-item {{ ($title == 'Finance' || $title == 'Edit Finance' || $title == 'Create Finance') ? 'active' : ''}}"
                     href="{{ route('super_admin.finance') }}">Finance</a>
+                <a class="collapse-item {{ ($title == 'Customer') ? 'active' : ''}}"
+                    href="{{ route('super_admin.customer') }}">Customer</a>
+                <a class="collapse-item {{ ($title == 'Agen' || $title == 'Edit Finance' || $title == 'Create Finance') ? 'active' : ''}}"
+                    href="{{ route('super_admin.agen') }}">Agen</a>
             </div>
         </div>
     </li>

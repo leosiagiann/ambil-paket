@@ -93,6 +93,7 @@ Route::name('admin.')->prefix('admin')->group(function () {
     Route::group(['middleware' => 'auth'], function () {
         Route::group(['middleware' => 'admin'], function () {
             Route::get('', [AdminController::class, 'index'])->name('index');
+            
             Route::get('customer', [AdminController::class, 'customer'])->name('customer');
             Route::get('customer/activate/{customer}', [AdminController::class, 'activateCustomer'])->name('customer.activate');
             Route::get('customer/deactivate/{customer}', [AdminController::class, 'deactivateCustomer'])->name('customer.deactivate');
@@ -107,7 +108,6 @@ Route::name('admin.')->prefix('admin')->group(function () {
             Route::get('item-pengiriman', [AdminController::class, 'pengirimanItem'])->name('item.pengiriman');
             Route::get('item-pengiriman/{item}', [AdminController::class, 'generateResi'])->name('item.generateResi');
 
-
             Route::get('riwayat-pengiriman', [AdminController::class, 'riwayatPengiriman'])->name('riwayat-pengiriman');
         });
     });
@@ -117,6 +117,8 @@ Route::name('super_admin.')->prefix('super_admin')->group(function () {
     Route::group(['middleware' => 'auth'], function () {
         Route::group(['middleware' => 'super_admin'], function () {
             Route::get('', [SuperAdminController::class, 'index'])->name('index');
+
+
             Route::get('admin', [SuperAdminController::class, 'admin'])->name('admin');
             Route::get('admin/create', [SuperAdminController::class, 'createAdmin'])->name('admin.create');
             Route::post('admin/create', [SuperAdminController::class, 'storeAdmin'])->name('admin.store');
@@ -138,6 +140,16 @@ Route::name('super_admin.')->prefix('super_admin')->group(function () {
             Route::get('item', [SuperAdminController::class, 'item'])->name('item');
             Route::get('item/done', [SuperAdminController::class, 'itemDone'])->name('item.done');
             Route::get('item/cancel', [SuperAdminController::class, 'itemCancel'])->name('item.cancel');
+            
+            Route::get('customer', [SuperAdminController::class, 'customer'])->name('customer');
+            Route::get('customer/activate/{customer}', [SuperAdminController::class, 'activateCustomer'])->name('customer.activate');
+            Route::get('customer/deactivate/{customer}', [SuperAdminController::class, 'deactivateCustomer'])->name('customer.deactivate');
+            Route::delete('customer/{customer}', [SuperAdminController::class, 'destroyCustomer'])->name('customer.destroy');
+
+            Route::get('agen', [SuperAdminController::class, 'agen'])->name('agen');
+            Route::get('agen/activate/{agen}', [SuperAdminController::class, 'activateAgen'])->name('agen.activate');
+            Route::get('agen/deactivate/{agen}', [SuperAdminController::class, 'deactivateAgen'])->name('agen.deactivate');
+            Route::delete('agen/{agen}', [SuperAdminController::class, 'destroyAgen'])->name('agen.destroy');
         });
     });
 });
