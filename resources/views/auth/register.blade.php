@@ -23,76 +23,74 @@
 <body class="bg-gradient-primary">
 
     <div class="container">
-
-        <div class="card o-hidden border-0 shadow-lg my-5">
-            <div class="card-body p-0">
-                <div class="row">
-                    <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
-                    <div class="col-lg-7">
-                        <div class="p-5">
-                            <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
-                            </div>
-                            <form class="user" action="/auth/register" method="post">
-                                @csrf
-                                <div class="form-group">
-                                    <input type="text"
-                                        class="form-control form-control-user @error('name') is-invalid @enderror"
-                                        id="exampleInputName" placeholder="Kevin Pratama" name="name" autofocus
-                                        value="{{ old('name') }}">
-                                    @error('name')
-                                    <span class="invalid-feedback ml-3" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                                <div class="form-group">
-                                    <input type="email"
-                                        class="form-control form-control-user @error('email') is-invalid @enderror"
-                                        id="exampleInputEmail" placeholder="kevin@gmail.com" name="email"
-                                        value="{{ old('email') }}">
-                                    @error('email')
-                                    <span class="invalid-feedback ml-3" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="password"
-                                            class="form-control form-control-user @error('password') is-invalid @enderror"
-                                            id="exampleInputPassword" placeholder="Password" name="password">
-                                        @error('password')
-                                        <span class="invalid-feedback ml-3" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                        @enderror
+        <div class="row justify-content-center">
+            <div class="col-xl-8 col-lg-12 col-md-9">
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
                                     </div>
-                                    <div class="col-sm-6">
-                                        <input type="password"
-                                            class="form-control form-control-user @error('password') is-invalid @enderror"
-                                            id="exampleRepeatPassword" placeholder="Repeat Password"
-                                            name="password_confirmation">
+                                    <form class="user" action="/auth/register" method="post">
+                                        @csrf
+                                        <div class="form-group">
+                                            <input type="text"
+                                                class="form-control form-control-user @error('name') is-invalid @enderror"
+                                                id="exampleInputName" placeholder="Kevin Pratama" name="name" autofocus
+                                                value="{{ old('name') }}">
+                                            @error('name')
+                                            <span class="invalid-feedback ml-3" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="email"
+                                                class="form-control form-control-user @error('email') is-invalid @enderror"
+                                                id="exampleInputEmail" placeholder="kevin@gmail.com" name="email"
+                                                value="{{ old('email') }}">
+                                            @error('email')
+                                            <span class="invalid-feedback ml-3" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                                <input type="password"
+                                                    class="form-control form-control-user @error('password') is-invalid @enderror"
+                                                    id="exampleInputPassword" placeholder="Password" name="password">
+                                                @error('password')
+                                                <span class="invalid-feedback ml-3" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                                @enderror
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <input type="password"
+                                                    class="form-control form-control-user @error('password') is-invalid @enderror"
+                                                    id="exampleRepeatPassword" placeholder="Repeat Password"
+                                                    name="password_confirmation">
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary btn-user btn-block">
+                                            <i class="fas fa-user-plus"></i>
+                                            Register
+                                        </button>
+                                    </form>
+                                    <hr>
+                                    <div class="text-center">
+                                        <a class="small" href="{{ route('auth.login') }}">Already have an account? Login!</a>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-primary btn-user btn-block">
-                                    <i class="fas fa-user-plus"></i>
-                                    Register
-                                </button>
-                            </form>
-                            <hr>
-                            <div class="text-center">
-                                <a class="small" href="forgot-password.html">Forgot Password?</a>
-                            </div>
-                            <div class="text-center">
-                                <a class="small" href="{{ route('auth.login') }}">Already have an account? Login!</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
 
     <script src="{{ asset('assets/vendor/jquery/jquery.min.js') }}"></script>
