@@ -261,7 +261,7 @@ class SuperAdminController extends Controller
 
     private function getAllAdmin()
     {
-        return User::where('role_id', 5)
+        return User::where('role_id', 2)
             ->orderBy('created_at', 'desc')
             ->get();
     }
