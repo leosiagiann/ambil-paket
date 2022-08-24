@@ -42,10 +42,6 @@
                     </thead>
                     <tbody>
                         @foreach ($items as $item)
-                        @php
-                        $user_id = $pathAgenController::getIdUserItem($item->bank_id);
-                        @endphp
-                        @if ($user_id == auth()->user()->id)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>
@@ -108,7 +104,6 @@
                                     <span class="text">Paket telah dikirim</span>
                                 </button>
                             </td>
-                            @endif
                             <!-- modal finishPositionItem{{ $item->id }} -->
                             <div class="modal fade" id="finishPositionItem{{ $item->id }}" tabindex="-1" role="dialog"
                                 aria-labelledby="exampleModalLabel" aria-hidden="true">

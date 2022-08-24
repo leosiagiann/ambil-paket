@@ -122,7 +122,6 @@ class AgenController extends Controller
             'title' => 'Lacak Paket',
             'page' => 'Paket',
             'items' => $this->getAllItemInfo(),
-            'pathAgenController' => \App\Http\Controllers\AgenController::class,
         ]);
     }
 
@@ -190,9 +189,15 @@ class AgenController extends Controller
 
     private function getAllItemInfo()
     {
-        return Item::where('status', 'process')
+        $items = Item::where('status', 'process')
             ->latest()
             ->get();
+
+        $items = $items->filter(function ($item) {
+            return $this->getUserIDFromBank($item->bank_id) == auth()->user()->id;
+        });
+
+        return $items;
     }
 
     public function getIdUserItem($bank_id)
