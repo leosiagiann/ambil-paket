@@ -134,6 +134,10 @@ Route::name('super_admin.')->prefix('super_admin')->group(function () {
             Route::get('finance/{finance}', [SuperAdminController::class, 'editFinance'])->name('finance.edit');
             Route::put('finance/{finance}', [SuperAdminController::class, 'updateFinance'])->name('finance.update');
             Route::delete('finance/{finance}', [SuperAdminController::class, 'destroyFinance'])->name('finance.destroy');
+
+            Route::get('item', [SuperAdminController::class, 'item'])->name('item');
+            Route::get('item/done', [SuperAdminController::class, 'itemDone'])->name('item.done');
+            Route::get('item/cancel', [SuperAdminController::class, 'itemCancel'])->name('item.cancel');
         });
     });
 });
