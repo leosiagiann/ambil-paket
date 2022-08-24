@@ -315,6 +315,13 @@ class SuperAdminController extends Controller
         ]);
     }
 
+    private function getAllCustomer()
+    {
+        return User::where('role_id', '5')
+            ->latest()
+            ->get();
+    }
+
     public function activateCustomer(User $customer)
     {
         $customer->status = 'active';
@@ -322,11 +329,11 @@ class SuperAdminController extends Controller
         return redirect()->route('admin.customer')->with('success', 'Customer berhasil diaktifkan');
     }
 
-    private function getAllCustomer()
+    public function deactivateCustomer(User $customer)
     {
-        return User::where('role_id', '5')
-            ->latest()
-            ->get();
+        $customer->status = 'inactive';
+        $customer->save();
+        return redirect()->route('admin.customer')->with('success', 'Customer berhasil dinonaktifkan');
     }
     /* CUSTOMER */
 
