@@ -15,7 +15,35 @@ class FinanceController extends Controller
         return view('finance.index', [
             'title' => 'Dashboard',
             'page' => 'Dashboard',
+            'agens' => $this->getCountAgen(),
+            'customers' => $this->getCountCustomer(),
+            'items' => $this->getCountItem(),
+            'itemCancels' => $this->getCountItemCancel(),
         ]);
+    }
+
+    public function getCountItemCancel()
+    {
+        return Item::where('status', 'rejected')
+        ->orWhere('status', 'canceled')
+        ->orWhere('status', 'not_process')
+        ->count();
+    }
+
+    public function getCountItem()
+    {
+        return Item::where('status', 'done')->count();
+    }   
+
+    public function getCountCustomer()
+    {
+        return User::where('role_id', 5)->count();
+    }
+
+    private function getCountAgen()
+    {
+        $agen = User::where('role_id', 4)->count();
+        return $agen;
     }
 
     public function agen()
