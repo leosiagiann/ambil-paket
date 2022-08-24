@@ -81,6 +81,10 @@ Route::name('finance.')->prefix('finance')->group(function () {
             Route::get('agen/edit-bank/{bank}', [FinanceController::class, 'editBank'])->name('agen.editBank');
             Route::put('agen/edit-bank/{bank}', [FinanceController::class, 'updateBank'])->name('agen.updateBank');
             Route::delete('agen/{bank}', [FinanceController::class, 'destroyBank'])->name('agen.destroyBank');
+
+            Route::get('item', [FinanceController::class, 'item'])->name('item');
+            Route::get('item/done', [FinanceController::class, 'itemDone'])->name('item.done');
+            Route::get('item/cancel', [FinanceController::class, 'itemCancel'])->name('item.cancel');
         });
     });
 });

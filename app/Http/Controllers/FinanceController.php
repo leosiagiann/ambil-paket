@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Bank;
+use App\Models\Item;
 use App\Models\TypeBank;
 
 class FinanceController extends Controller
@@ -82,6 +83,62 @@ class FinanceController extends Controller
                 'bank_name.required' => 'Silahkan masukkan nama pemilik rekening',
             ]
         );
+    }
+
+    public function item()
+    {
+        return view('finance.item.index', [
+            'title' => 'Pengiriman Paket',
+            'items' => $this->getAllItem(),
+            'page' => 'Paket',
+        ]);
+    }
+
+    public function itemDone()
+    {
+        return view('finance.item.done', [
+            'title' => 'Riwayat Pengiriman',
+            'items' => $this->getAllItemDone(),
+            'page' => 'Paket',
+        ]);
+    }
+
+    public function itemCancel()
+    {
+        return view('finance.item.cancel', [
+            'title' => 'Riwayat Penolakan',
+            'items' => $this->getAllItemCancel(),
+            'page' => 'Paket',
+        ]);
+    }
+
+    private function getAllItem()
+    {
+        return Item::with('sender', 'receiver', 'bank')
+            ->where('status', 'request')
+            ->orWhere('status', 'accepted')
+            ->orWhere('status', 'ok')
+            ->orWhere('status', 'paid')
+            ->latest()
+            ->get();
+    }
+
+    private function getAllItemDone()
+    {
+        return Item::with('sender', 'receiver', 'bank')
+            ->where('status', 'done')
+            ->latest()
+            ->get();
+    }
+
+    private function getAllItemCancel()
+    {
+        return Item::with('sender', 'receiver', 'bank')
+            ->where('status', 'canceled')
+            ->orWhere('status', 'rejected')
+            ->orWhere('status', 'not_process')
+            ->latest()
+            ->get();
     }
 
     private function getAllAgen()
