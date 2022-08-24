@@ -326,21 +326,21 @@ class SuperAdminController extends Controller
     {
         $customer->status = 'active';
         $customer->save();
-        return redirect()->route('admin.customer')->with('success', 'Customer berhasil diaktifkan');
+        return redirect()->route('super_admin.customer')->with('success', 'Customer berhasil diaktifkan');
     }
 
     public function deactivateCustomer(User $customer)
     {
         $customer->status = 'inactive';
         $customer->save();
-        return redirect()->route('admin.customer')->with('success', 'Customer berhasil dinonaktifkan');
+        return redirect()->route('super_admin.customer')->with('success', 'Customer berhasil dinonaktifkan');
     }
 
     public function destroyCustomer(User $customer)
     {
         $customerDel = $customer;
         $customer->delete();
-        return redirect()->route('admin.customer')->with('success', 'Customer with email ' . $customerDel->email . ' has been deleted.');
+        return redirect()->route('super_admin.customer')->with('success', 'Customer with email ' . $customerDel->email . ' has been deleted.');
     }
     /* CUSTOMER */
 
