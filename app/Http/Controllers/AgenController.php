@@ -132,7 +132,6 @@ class AgenController extends Controller
             'title' => 'Riwayat Pengiriman',
             'page' => 'Paket',
             'items' => $this->getItemHistory(),
-            'pathAgenController' => \App\Http\Controllers\AgenController::class,
         ]);
     }
 
