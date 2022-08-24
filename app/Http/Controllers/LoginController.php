@@ -7,11 +7,6 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         if (auth()->check()) {
@@ -21,82 +16,24 @@ class LoginController extends Controller
         return view('auth.login');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $validate = $this->validateLogin($request);
 
         if (Auth::attempt($validate)) {
-            if ($this->isActive()) {
+            if (auth()->user()->status == 'active') {
                 $request->session()->regenerate();
                 return redirect()->route(Auth::user()->role->name . '.index');
-            } else {
+            } elseif(auth()->user()->status == 'inactive') {
                 $this->resetAuth();
                 return back()->with('login_error', 'Your account has not been activated!');
+            } elseif(auth()->user()->status == 'freeze') { 
+                $this->resetAuth();
+                return back()->with('login_error', 'Your account has been frozen!');
             }
         }
 
         return back()->with('login_error', 'Login failed! Please try again');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 
     public function logout()
@@ -112,16 +49,6 @@ class LoginController extends Controller
             'password' => 'required|string|min:6',
         ]);
         return $validate;
-    }
-
-    private function isActive()
-    {
-        $user = auth()->user();
-        $status = $user->status;
-        if ($status == 'inactive') {
-            return false;
-        }
-        return true;
     }
 
     private function resetAuth()
