@@ -144,7 +144,7 @@ class AdminController extends Controller
     private function getAllCustomer()
     {
         return User::where('role_id', '5')
-            ->orderBy('created_at', 'desc')
+            ->latest()
             ->get();
     }
 
