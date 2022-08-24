@@ -350,4 +350,11 @@ class SuperAdminController extends Controller
         $agen->save();
         return redirect()->route('admin.agen')->with('success', 'Agen berhasil dinonaktifkan');
     }
+
+    public function destroyAgen(User $agen)
+    {
+        $agenDel = $agen;
+        $agen->delete();
+        return redirect()->route('admin.agen')->with('success', 'Agen with email ' . $agenDel->email . ' has been deleted.');
+    }
 }
