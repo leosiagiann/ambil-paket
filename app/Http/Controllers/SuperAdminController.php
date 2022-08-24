@@ -365,21 +365,21 @@ class SuperAdminController extends Controller
     {
         $agen->status = 'active';
         $agen->save();
-        return redirect()->route('admin.agen')->with('success', 'Agen berhasil diaktifkan');
+        return redirect()->route('super_admin.agen')->with('success', 'Agen berhasil diaktifkan');
     }
 
     public function deactivateAgen(User $agen)
     {
         $agen->status = 'freeze';
         $agen->save();
-        return redirect()->route('admin.agen')->with('success', 'Agen berhasil dinonaktifkan');
+        return redirect()->route('super_admin.agen')->with('success', 'Agen berhasil dinonaktifkan');
     }
 
     public function destroyAgen(User $agen)
     {
         $agenDel = $agen;
         $agen->delete();
-        return redirect()->route('admin.agen')->with('success', 'Agen with email ' . $agenDel->email . ' has been deleted.');
+        return redirect()->route('super_admin.agen')->with('success', 'Agen with email ' . $agenDel->email . ' has been deleted.');
     }
     /* AGEN */
 }
