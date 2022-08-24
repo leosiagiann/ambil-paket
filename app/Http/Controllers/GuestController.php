@@ -19,8 +19,6 @@ class GuestController extends Controller
         return view('guest.item.index', [
             'title' => 'Kirim Paket',
             'page' => 'Paket',
-            'items' => $this->getAllItems(),
-            'pathItemController' => \App\Http\Controllers\ItemController::class,
         ]);
     }
 
@@ -29,8 +27,6 @@ class GuestController extends Controller
         return view('guest.item.lacak-paket', [
             'title' => 'Lacak Paket',
             'page' => 'Paket',
-            'items' => $this->getAllItemsLacak(),
-            'pathItemController' => \App\Http\Controllers\ItemController::class,
         ]);
     }
 
@@ -39,7 +35,6 @@ class GuestController extends Controller
         return view('guest.item.riwayat-pengiriman', [
             'title' => 'Riwayat Pengiriman',
             'page' => 'Paket',
-            'items' => $this->getItemHistory(),
         ]);
     }
 }
