@@ -40,11 +40,11 @@
                             <td>
                                 <!-- make icon on of for active or inactiove users -->
                                 @if ($agen->status == 'active')
-                                <a href="{{ route('admin.agen.deactivate', $agen->id) }}" class="btn btn-danger btn-sm">
+                                <a href="{{ route('super_admin.agen.deactivate', $agen->id) }}" class="btn btn-danger btn-sm">
                                     <i class="fas fa-user-times"></i>
                                 </a>
                                 @else
-                                <a href="{{ route('admin.agen.activate', $agen->id) }}" class="btn btn-success btn-sm">
+                                <a href="{{ route('super_admin.agen.activate', $agen->id) }}" class="btn btn-success btn-sm">
                                     <i class="fas fa-user-check"></i>
                                 </a>
                                 @endif
@@ -70,7 +70,7 @@
                                             <div class="modal-footer">
                                                 <button class="btn btn-secondary" type="button"
                                                     data-dismiss="modal">Cancel</button>
-                                                <form action="{{ route('admin.agen.destroy', $agen->id) }}"
+                                                <form action="{{ route('super_admin.agen.destroy', $agen->id) }}"
                                                     method="POST">
                                                     @csrf
                                                     @method('DELETE')
