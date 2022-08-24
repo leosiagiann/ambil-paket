@@ -41,10 +41,6 @@
                     </thead>
                     <tbody>
                         @foreach ($items as $item)
-                        @php
-                        $user_id = $pathAgenController::getIdUserItem($item->bank_id);
-                        @endphp
-                        @if ($item-> status == 'request' || $user_id == auth()->user()->id)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>
@@ -131,7 +127,6 @@
                                 <span class="badge badge-warning">Menunggu Pembayaran</span>
                                 @endif
                             </td>
-                            @endif
                             <!-- modal process{{ $item->id }} -->
                             <div class="modal fade" id="process{{ $item->id }}" tabindex="-1" role="dialog"
                                 aria-labelledby="exampleModalLabel" aria-hidden="true">

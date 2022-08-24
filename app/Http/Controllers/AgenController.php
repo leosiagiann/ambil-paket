@@ -22,12 +22,6 @@ class AgenController extends Controller
         ]);
     }
 
-    private function getUserIDFromBank($bank_id)
-    {
-        $user_id = Bank::where('id', $bank_id)->first()->user_id;
-        return $user_id;
-    }
-
     public function getCountItemCancel()
     {
         $items =  Item::where('status', 'rejected')
@@ -71,7 +65,6 @@ class AgenController extends Controller
             'title' => 'Konfirmasi Paket',
             'page' => 'Paket',
             'items' => $this->getAllItem(),
-            'pathAgenController' => \App\Http\Controllers\AgenController::class,
         ]);
     }
 
@@ -134,8 +127,6 @@ class AgenController extends Controller
         ]);
     }
 
-
-
     private function getItemHistory()
     {
         $items =  Item::with('sender', 'receiver', 'bank')
@@ -179,12 +170,18 @@ class AgenController extends Controller
 
     private function getAllItem()
     {
-        return Item::where('status', 'request')
+        $items =  Item::where('status', 'request')
             ->orWhere('status', 'accepted')
             ->orWhere('status', 'ok')
             ->orWhere('status', 'paid')
             ->latest()
             ->get();
+
+        $items = $items->filter(function ($item) {
+            return $this->getUserIDFromBank($item->bank_id) == auth()->user()->id;
+        });
+
+        return $items;
     }
 
     private function getAllItemInfo()
@@ -203,6 +200,12 @@ class AgenController extends Controller
     public function getIdUserItem($bank_id)
     {
         $user_id = Bank::find($bank_id)->user_id;
+        return $user_id;
+    }
+
+    private function getUserIDFromBank($bank_id)
+    {
+        $user_id = Bank::where('id', $bank_id)->first()->user_id;
         return $user_id;
     }
 }
