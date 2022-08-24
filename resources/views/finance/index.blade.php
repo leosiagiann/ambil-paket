@@ -2,15 +2,12 @@
 @include('layouts.finance.sidebar')
 @include('layouts.navbar')
 @section('content')
-<!-- Begin Page Content -->
 <div class="container-fluid">
 
-    <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Beranda</h1>
     </div>
 
-    <!-- Content Row -->
     <div class="row">
         <div class="col-xl-3 col-md-6 mb-4">
             <a href="{{ route('finance.agen') }}" style="text-decoration: none;">
@@ -99,5 +96,4 @@
         </div>
     </div>
 </div>
-<!-- /.container-fluid -->
 @endsection
