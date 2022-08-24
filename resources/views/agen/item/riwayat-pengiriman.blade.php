@@ -37,20 +37,10 @@
                             <th>Pembayaran</th>
                         </tr>
                     </thead>
-                    @php
-                    $no = 0;
-                    @endphp
                     <tbody>
                         @foreach ($items as $item)
-                        @php
-                        $user_id = $pathAgenController::getIdUserItem($item->bank_id);
-                        @endphp
-                        @if ($user_id == auth()->user()->id)
-                        @php
-                        $no++;
-                        @endphp
                         <tr>
-                            <td>{{ $no }}</td>
+                            <td>{{ $loop->iteration }}</td>
                             <td>
                                 @if ($item->resi)
                                 {{ $item->resi }}
@@ -117,7 +107,6 @@
                                 -
                                 @endif
                             </td>
-                            @endif
                             <!-- modal proof{{ $item->id }} -->
                             <!-- make modal for download proof -->
                             <div class="modal fade" id="proof{{ $item->id }}" tabindex="-1" role="dialog"

@@ -147,6 +147,10 @@ class AgenController extends Controller
             ->orWhere('status', 'not_process')
             ->latest()
             ->get();
+
+        $items = $items->filter(function ($item) {
+            return $this->getUserIDFromBank($item->bank_id) == auth()->user()->id;
+        });
         return $items;
     }
 
