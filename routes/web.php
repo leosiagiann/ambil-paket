@@ -27,6 +27,10 @@ use Illuminate\Support\Facades\Route;
 Route::name('index')->prefix('')->group(function () {
     Route::group(['middleware' => 'isGuest'], function () {
         Route::get('', [GuestController::class, 'index']);
+
+        Route::get('kirim-paket', [GuestController::class, 'indexItem'])->name('.item');
+        Route::get('lacak-paket', [GuestController::class, 'lacakPaket'])->name('.lacak-paket');
+        Route::get('riwayat-pengiriman', [GuestController::class, 'riwayatPengiriman'])->name('.riwayat-pengiriman');
     });
 });
 

@@ -6,81 +6,40 @@ use Illuminate\Http\Request;
 
 class GuestController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         return view('guest.index', [
             'title' => 'Dashboard',
+            'page' => 'Dashboard'
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function indexItem()
     {
-        //
+        return view('guest.item.index', [
+            'title' => 'Kirim Paket',
+            'page' => 'Paket',
+            'items' => $this->getAllItems(),
+            'pathItemController' => \App\Http\Controllers\ItemController::class,
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function lacakPaket()
     {
-        //
+        return view('guest.item.lacak-paket', [
+            'title' => 'Lacak Paket',
+            'page' => 'Paket',
+            'items' => $this->getAllItemsLacak(),
+            'pathItemController' => \App\Http\Controllers\ItemController::class,
+        ]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function riwayatPengiriman()
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        return view('guest.item.riwayat-pengiriman', [
+            'title' => 'Riwayat Pengiriman',
+            'page' => 'Paket',
+            'items' => $this->getItemHistory(),
+        ]);
     }
 }

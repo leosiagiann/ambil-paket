@@ -18,10 +18,25 @@
         Menu
     </div>
     <li class="nav-item">
-        <a class="nav-link" href="#">
-            <i class="fas fa-users"></i>
-            <span>User</span>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
+            aria-controls="collapseTwo">
+            <i class="fas fa-fw fa-gift"></i>
+            <span>Paket</span>
         </a>
+        <div id="collapseTwo" class="collapse {{ ($page == 'Paket') ? 'show' : ''}}" aria-labelledby="headingTwo"
+            data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Pilihan Paket:</h6>
+                <a class="collapse-item {{ $title == 'Kirim Paket' ? 'active' : ''}}"
+                    href="{{ route('index.item') }}">Kirim Paket</a>
+                <a class="collapse-item {{ $title == 'Lacak Paket' ? 'active' : ''}}"
+                    href="{{ route('index.lacak-paket') }}">Lacak
+                    Paket</a>
+                <a class="collapse-item {{ $title == 'Riwayat Pengiriman' ? 'active' : ''}}"
+                    href="{{ route('index.riwayat-pengiriman') }}">Riwayat
+                    Pengiriman</a>
+            </div>
+        </div>
     </li>
 </ul>
 <!-- Side Bar -->
