@@ -14,7 +14,31 @@ class SuperAdminController extends Controller
         return view('super_admin.index', [
             'title' => 'Dashboard',
             'page' => 'Dashboard',
+            'customers' => $this->getCountCustomer(),
+            'agens' => $this->getCountAgen(),
+            'finances' => $this->getCountFinance(),
+            'admins' => $this->getCountAdmin(),
         ]);
+    }
+
+    public function getCountCustomer()
+    {
+        return User::where('role_id', 5)->count();
+    }
+
+    public function getCountAgen()
+    {
+        return User::where('role_id', 4)->count();
+    }
+    
+    public function getCountFinance()
+    {
+        return User::where('role_id', 3)->count();
+    }
+
+    public function getCountAdmin()
+    {
+        return User::where('role_id', 2)->count();
     }
 
     public function admin()
