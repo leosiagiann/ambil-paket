@@ -304,4 +304,20 @@ class SuperAdminController extends Controller
             ->latest()
             ->get();
     }
+
+    public function customer()
+    {
+        return view('super_admin.customer.index', [
+            'title' => 'Customer',
+            'customers' => $this->getAllCustomer(),
+            'page' => 'Users',
+        ]);
+    }
+
+    private function getAllCustomer()
+    {
+        return User::where('role_id', '5')
+            ->latest()
+            ->get();
+    }
 }
