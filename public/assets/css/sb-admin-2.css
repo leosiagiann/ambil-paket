@@ -10882,6 +10882,14 @@ form.user .custom-checkbox.small label {
   line-height: 1.5rem;
 }
 
+.input100 {
+  width: 100%;
+}
+
+.wrap-input100 {
+  width: 100%;
+}
+
 form.user .form-control-user {
   font-size: 0.8rem;
   border-radius: 10rem;
