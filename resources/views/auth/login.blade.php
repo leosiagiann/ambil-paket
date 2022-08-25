@@ -93,8 +93,8 @@
 					</div>
 
 					<div class="text-center p-t-136">
-						<a class="txt2" href="{{ route('auth.register') }}">
-							Create your Account
+						<a class="txt2" href="{{ route('index') }}">
+							Dashboard
 							<i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
 						</a>
 					</div>
