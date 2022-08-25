@@ -87,13 +87,13 @@
 						<span class="txt1">
 							Do not have an account?
 						</span>
-						<a class="txt2" href="#">
+						<a class="txt2" href="{{ route('auth.register') }}">
                             Sign Up
 						</a>
 					</div>
 
 					<div class="text-center p-t-136">
-						<a class="txt2" href="#">
+						<a class="txt2" href="{{ route('auth.register') }}">
 							Create your Account
 							<i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
 						</a>
