@@ -26,8 +26,3 @@ Laravel is a web application framework with expressive, elegant syntax. We belie
 - Set .env to your Database : Line 11 - 16
 - Run in terminal : php artisan migrate --seed
 - Happy Enjoy :D
-
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
