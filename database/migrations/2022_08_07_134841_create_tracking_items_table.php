@@ -20,7 +20,7 @@ class CreateTrackingItemsTable extends Migration
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
             $table->string('status');
-            $table->dateTime('time');
+            $table->dateTime('time')->nullable();
             $table->timestamps();
         });
     }
