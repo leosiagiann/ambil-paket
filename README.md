@@ -9,8 +9,6 @@
 
 ## Minimum Requirement
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
-
 - [PHP 7.4/8](https://www.php.net/downloads).
 - [Composer 2](https://getcomposer.org/download/).
 - MySQL
